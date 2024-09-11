@@ -1,13 +1,13 @@
-import NavBar from '@/components/NavBar'
+// import NavBar from '@/components/NavBar'
+import SearchCourses from '@/components/SearchCourses'
 import React from 'react'
 
 function page() {
   return (
 
     <div>
-      
-    <NavBar/>
-
+      {/* <NavBar /> */}
+      <SearchCourses />
     </div>
   )
 
