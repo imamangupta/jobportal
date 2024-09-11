@@ -1,4 +1,4 @@
-import NavBar from '@/components/NavBar'
+import Home from '../components/Home'
 import React from 'react'
 
 function page() {
@@ -6,7 +6,8 @@ function page() {
 
     <div>
       
-    <NavBar/>
+    <Home/>
+    
 
     </div>
   )

@@ -1,3 +1,5 @@
+const { transform } = require('next/dist/build/swc');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -11,6 +13,7 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+    
     },
   },
   plugins: [],
