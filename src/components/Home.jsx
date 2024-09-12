@@ -1,7 +1,37 @@
+"use client";
+
 import { Play } from "lucide-react";
 import NavBar from "./NavBar";
+import gsap from "gsap";
+import { useEffect, useRef } from 'react';
+
+
 
 const Home = () => {
+  const logoContainerRef = useRef(null);
+
+  useEffect(() => {
+    const logos = logoContainerRef.current;
+    const containerWidth = logos.scrollWidth;
+
+    // Duplicating the logo elements to prevent blank space during scroll
+    const clone = logos.innerHTML;
+    logos.innerHTML += clone;
+
+    gsap.to(logos, {
+      x: `-${containerWidth}px`,
+      duration: 20, // Adjust the duration to control scroll speed
+      ease: 'linear',
+      repeat: -1,
+      modifiers: {
+        x: (x) => {
+          // Modifies x to make it loop without gaps
+          return `${parseFloat(x) % containerWidth}px`;
+        },
+      },
+    });
+  }, []);
+
   return (
     <div className="bg-[#f8f3ff]  w-full h-screen">
       <NavBar />
@@ -47,19 +77,47 @@ const Home = () => {
         </div>
       </main>
 
-      <footer className="bg-gradient-to-t from-pink-400 to-purple-500 w-full h-32">
-          <div className="flex overflow-hidden space-x-16">
-
-         <div className="flex justify-center space-x-16 animate-loop-scroll">
-          <img className="object-contain w-48" src="\assets\Duolingo_logo.svg" alt="Duolingo"  />
-          <img className="object-contain w-48" src="\assets\Magic_Leap.svg" alt="Duolingo"  />
-          <img className="object-contain w-48" src="\assets\Duolingo_logo.svg" alt="Duolingo"  />
-          <img className="object-contain w-48" src="\assets\Duolingo_logo.svg" alt="Duolingo"  />
-        
-         
-        </div> 
+      <footer className="bg-gradient-to-t from-pink-400 to-purple-500 w-full h-28">
+      <div className="flex overflow-hidden ">
+      <div
+        ref={logoContainerRef}
+        className="flex justify-center space-x-16 p-10"
+      >
+      
+        <img
+          className="object-contain  w-44"
+          src="/assets/Duolingo_logo.svg"
+          alt="Magic Leap"
+        />
+        <img
+          className="object-contain  w-44"
+          src="/assets/Duolingo_logo.svg"
+          alt="Magic Leap"
+        />
+        <img
+          className="object-contain  w-44"
+          src="/assets/Duolingo_logo.svg"
+          alt="Magic Leap"
+        />
+        <img
+          className="object-contain  w-44"
+          src="/assets/Duolingo_logo.svg"
+          alt="Magic Leap"
+        />
+        <img
+          className="object-contain  w-44"
+          src="/assets/Duolingo_logo.svg"
+          alt="Magic Leap"
+        />
+        <img
+          className="object-contain  w-44"
+          src="/assets/Duolingo_logo.svg"
+          alt="Magic Leap"
+        />
        
-         </div> 
+       
+      </div>
+    </div>
          
       </footer>
     </div>
