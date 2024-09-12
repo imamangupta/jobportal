@@ -1,13 +1,14 @@
-// import NavBar from '@/components/NavBar'
-import SearchCourses from '@/components/SearchCourses'
+import Home from '../components/Home'
 import React from 'react'
 
 function page() {
   return (
 
     <div>
-      {/* <NavBar /> */}
-      <SearchCourses />
+      
+    <Home/>
+    
+
     </div>
   )
 
