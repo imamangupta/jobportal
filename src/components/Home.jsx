@@ -33,7 +33,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-[#f8f3ff]  w-full h-screen">
+    <div className="bg-[#f8f3ff] overflow-hidden w-full h-screen">
       <NavBar />
       <main className="flex flex-col md:flex-row items-center justify-between p-8 max-w-7xl h-[75%] mx-auto">
         <div className="md:w-1/2 space-y-6">
@@ -78,47 +78,47 @@ const Home = () => {
       </main>
 
       <footer className="bg-gradient-to-t from-pink-400 to-purple-500 w-full h-28">
-      <div className="flex overflow-hidden ">
-      <div
-        ref={logoContainerRef}
-        className="flex justify-center space-x-16 p-10"
-      >
-      
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-       
-       
-      </div>
-    </div>
-         
+        <div className="flex overflow-hidden ">
+          <div
+            ref={logoContainerRef}
+            className="flex justify-center space-x-16 p-10"
+          >
+
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+
+
+          </div>
+        </div>
+
       </footer>
     </div>
   );
