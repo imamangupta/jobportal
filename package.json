@@ -9,12 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.5",
     "add": "^2.0.6",
     "button": "^1.1.1",
+    "chart.js": "^4.4.4",
     "gsap": "^3.12.5",
+    "init": "^0.1.2",
     "lucide-react": "^0.439.0",
     "next": "14.2.9",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
     "shadcn-ui": "^0.9.0"
   },

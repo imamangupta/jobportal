@@ -77,11 +77,11 @@ const Home = () => {
         </div>
       </main>
 
-      <footer className="bg-gradient-to-t from-pink-400 to-purple-500 w-full h-28">
-      <div className="flex overflow-hidden ">
+      <footer className="bg-gradient-to-t from-pink-400 to-purple-500 py-6">
+      <div className="flex overflow-hidden  ">
       <div
         ref={logoContainerRef}
-        className="flex justify-center space-x-16 p-10"
+        className="flex justify-center space-x-7  container mx-auto px-4  items-center"
       >
       
         <img
