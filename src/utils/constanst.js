@@ -69,7 +69,7 @@ export const PopularCoursesCardData = [
         authorImg: sampleUserImg,
         rating: '4.2'
     },
-    { 
+    {
         id: 3,
         img: macBookImg,
         title: 'Web Design & Development',
@@ -80,5 +80,28 @@ export const PopularCoursesCardData = [
         authorName: 'J. Morgan',
         authorImg: sampleUserImg,
         rating: '4.2'
+    }
+];
+
+export const FAQData = [
+    {
+        id: 1,
+        question: 'Lorem, ipsum dolor?',
+        answer: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore officia culpa rem doloremque distinctio.'
+    },
+    {
+        id: 2,
+        question: 'Lorem, ipsum dolor?',
+        answer: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore officia culpa rem doloremque distinctio.'
+    },
+    {
+        id: 3,
+        question: 'Lorem, ipsum dolor?',
+        answer: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore officia culpa rem doloremque distinctio.'
+    },
+    {
+        id: 4,
+        question: 'Lorem, ipsum dolor?',
+        answer: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore officia culpa rem doloremque distinctio.'
     }
 ];
