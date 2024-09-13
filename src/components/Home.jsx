@@ -3,9 +3,7 @@
 import { Play } from "lucide-react";
 import NavBar from "./NavBar";
 import gsap from "gsap";
-import { useEffect, useRef } from 'react';
-
-
+import { useEffect, useRef } from "react";
 
 const Home = () => {
   const logoContainerRef = useRef(null);
@@ -21,7 +19,7 @@ const Home = () => {
     gsap.to(logos, {
       x: `-${containerWidth}px`,
       duration: 20, // Adjust the duration to control scroll speed
-      ease: 'linear',
+      ease: "linear",
       repeat: -1,
       modifiers: {
         x: (x) => {
@@ -41,7 +39,9 @@ const Home = () => {
             Develop your skills in a new and unique way
           </h1>
           <p className="text-gray-600 max-w-md">
-            Explore a transformative approach to skill development on our online learning platform. Uncover a new realm of learning experiences and elevate your expertise in unique ways.
+            Explore a transformative approach to skill development on our online
+            learning platform. Uncover a new realm of learning experiences and
+            elevate your expertise in unique ways.
           </p>
           <div className="flex space-x-4">
             <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition">
@@ -66,7 +66,9 @@ const Home = () => {
             <p className="text-purple-600 font-semibold">50+ Online Courses</p>
           </div>
           <div className="absolute bottom-44 right-32 bg-white rounded-lg shadow-lg p-4 transform translate-x-8 translate-y-8">
-            <p className="text-purple-600 font-semibold">10k+ Online Students</p>
+            <p className="text-purple-600 font-semibold">
+              10k+ Online Students
+            </p>
           </div>
           <div className="absolute bottom-20 left-0 bg-white rounded-lg shadow-lg p-4">
             <p className="text-purple-600 font-semibold">UI Design Class</p>
@@ -78,47 +80,43 @@ const Home = () => {
       </main>
 
       <footer className="bg-gradient-to-t from-pink-400 to-purple-500 py-6">
-      <div className="flex overflow-hidden  ">
-      <div
-        ref={logoContainerRef}
-        className="flex justify-center space-x-7 container mx-auto px-4  items-center"
-      >
-      
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-        <img
-          className="object-contain  w-44"
-          src="/assets/Duolingo_logo.svg"
-          alt="Magic Leap"
-        />
-       
-       
-      </div>
-    </div>
-         
+        <div className="flex overflow-hidden  ">
+          <div
+            ref={logoContainerRef}
+            className="flex justify-center space-x-7 container mx-auto px-4  items-center"
+          >
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+            <img
+              className="object-contain  w-44"
+              src="/assets/Duolingo_logo.svg"
+              alt="Magic Leap"
+            />
+          </div>
+        </div>
       </footer>
     </div>
   );
