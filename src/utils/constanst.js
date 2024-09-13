@@ -1,8 +1,12 @@
 import img1 from '../../public/assets/sideCourse.png'
+import img2 from '../../public/assets/macBook.jpg'
+import img3 from '../../public/assets/sampleUser.png'
 
 export const BaseApiUrl = "apilink";
 
 export const sideCourseImg = img1;
+export const macBookImg = img2;
+export const sampleUserImg = img3;
 
 export const courseBenefit = [
     {
@@ -37,5 +41,44 @@ export const courseBenefit = [
         </svg>,
         title: '1.5k+ Videos Courses',
         content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur accusamus, beatae necessitatibus eaque perferendis corrupti.'
+    }
+];
+
+export const PopularCoursesCardData = [
+    {
+        id: 1,
+        img: macBookImg,
+        title: 'Web Design & Development',
+        type: 'UI/UX Design',
+        price: '$560.00',
+        students: '150',
+        classes: '25',
+        authorName: 'J. Morgan',
+        authorImg: sampleUserImg,
+        rating: '4.2'
+    },
+    {
+        id: 2,
+        img: macBookImg,
+        title: 'Web Design & Development',
+        type: 'UI/UX Design',
+        price: '$560.00',
+        students: '150',
+        classes: '25',
+        authorName: 'J. Morgan',
+        authorImg: sampleUserImg,
+        rating: '4.2'
+    },
+    { 
+        id: 3,
+        img: macBookImg,
+        title: 'Web Design & Development',
+        type: 'UI/UX Design',
+        price: '$560.00',
+        students: '150',
+        classes: '25',
+        authorName: 'J. Morgan',
+        authorImg: sampleUserImg,
+        rating: '4.2'
     }
 ];
