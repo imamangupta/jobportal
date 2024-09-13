@@ -4,15 +4,17 @@ import PopularCourses from '@/components/PopularCourses'
 import FAQ from '@/components/FAQ'
 import Footer from '@/components/Footer'
 import React from 'react'
+import AboutUsDashboard from '@/components/AboutDashboard'
 
 function page() {
   return (
 
-    <div>
+    <div className="bg-[#f8f3ff]">
 
       <Home />
       <SearchCourses />
       <PopularCourses />
+      <AboutUsDashboard/>
       <FAQ />
       <Footer />
 

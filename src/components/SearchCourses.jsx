@@ -4,7 +4,7 @@ import { courseBenefit, sideCourseImg } from '@/utils/constanst'
 
 const SearchCourses = () => {
     return (
-        <div className='w-full h-[100dvh] flex flex-col items-center justify-center gap-4 mt-[3rem]'>
+        <div className='bg-[#f8f3ff]  w-full h-[100dvh] flex flex-col items-center justify-center gap-4 mt-[3rem]'>
             <h1 className='font-[700] text-zinc-800 text-[2rem]'>Search Courses</h1>
             <div className="w-[max-content] h-[max-content] flex items-center justify-center gap-4">
                 <div className="w-[max-content] h-[max-content] flex items-center justify-center gap-2 px-3 py-1 bg-slate-100 shadow-md">

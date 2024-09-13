@@ -10,7 +10,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className='w-full h-[100dvh] bg-zinc-300 flex items-center justify-between gap-2 px-20'>
+    <div className='w-full h-[100dvh] bg-[#f8f3ff] flex items-center justify-between gap-2 px-20'>
       <div className="w-[50%] h-[max-content] flex flex-col items-start justify-evenly gap-[2rem] p-2">
         <h1 className='font-[700] text-[4rem] w-[90%] leading-[1.2]'>Any questions? We got you.</h1>
         <p className='font-[500] text-[1rem] w-[90%]'>
