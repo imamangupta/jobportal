@@ -133,12 +133,12 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Contact Us</h4>
             <p>+1 (555) 123-4567</p>
-            <p>etechinfo@gmail.com</p>
+            <p>abc@gmail.com</p>
           </div>
         </div>
 
         <div className="mt-12 text-center text-sm">
-          <p>&copy; 2023 Etech. All rights reserved.</p>
+          <p>&copy; 2024 CodePathshala. All rights reserved.</p>
         </div>
       </div>
     </footer>
