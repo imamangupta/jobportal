@@ -1,5 +1,6 @@
+import Footer from "@/components/Footer";
 import "./globals.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import NavBar from "@/components/NavBar";
 export const metadata = {
   title: "CodePathshala",
   description: "CodePathshala help to find jobs/intership for newly Student.",
@@ -8,8 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <ChakraProvider>{children}</ChakraProvider>
+      <body className="bg-[#f8f3ff]">
+        <NavBar />
+        {children}
+        <Footer />
       </body>
     </html>
   );

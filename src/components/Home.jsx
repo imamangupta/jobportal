@@ -1,7 +1,6 @@
 "use client";
 
 import { Play } from "lucide-react";
-import NavBar from "./NavBar";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
 
@@ -29,7 +28,6 @@ const Home = () => {
 
   return (
     <div className="bg-[#f8f3ff] w-full h-screen overflow-hidden">
-      <NavBar />
       <main className="flex flex-col md:flex-row items-center    justify-between p-6 md:p-8 lg:p-12 max-w-7xl h-[75%] mx-auto">
         <div className="md:w-1/2 space-y-4 md:space-y-6 text-center md:text-left">
           <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">

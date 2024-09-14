@@ -1,14 +1,16 @@
+"use client";
 import React, { useState, useCallback } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import Link from "next/link";
 
 const NavItem = ({ href, children }) => (
-  <a
+  <Link
     href={href}
     className="text-gray-600 hover:text-gray-800 transition-colors duration-200 flex items-center"
   >
     {children}
     <ChevronDown className="ml-1 h-4 w-4" />
-  </a>
+  </Link>
 );
 
 const Button = ({ variant = "solid", children, className = "" }) => (
@@ -35,15 +37,10 @@ export default function NavBar() {
       <div className="flex justify-between items-center p-4 max-w-7xl mx-auto">
         <div className="text-2xl font-bold text-purple-800">CodePathshala</div>
         <nav className="hidden md:flex space-x-8 lg:space-x-16">
-          <NavItem href="#">Home</NavItem>
-          <NavItem href="#">Course</NavItem>
-          <NavItem href="#">Job</NavItem>
-          <a
-            href="#"
-            className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
-          >
-            Dashboard
-          </a>
+          <NavItem href="/">Home</NavItem>
+          <NavItem href="/courses">Course</NavItem>
+          <NavItem href="/jobs">Job</NavItem>
+          <NavItem href="/dashboard">Dashboard</NavItem>
         </nav>
         <div className="hidden md:flex space-x-2">
           <Button variant="outline">Sign In</Button>
