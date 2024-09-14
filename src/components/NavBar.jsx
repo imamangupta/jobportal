@@ -62,9 +62,10 @@ export default function NavBar() {
           className="absolute top-full left-0 right-0 bg-white shadow-md p-4 md:hidden"
         >
           <nav className="flex flex-col space-y-4">
-            <NavItem href="#">Home</NavItem>
-            <NavItem href="#">Course</NavItem>
-            <NavItem href="#">Job</NavItem>
+            <NavItem href="/">Home</NavItem>
+            <NavItem href="/courses">Course</NavItem>
+            <NavItem href="/jobs">Job</NavItem>
+            <NavItem href="/dashboard">Dashboard</NavItem>
             <a
               href="#"
               className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
