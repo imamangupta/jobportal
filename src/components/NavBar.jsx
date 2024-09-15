@@ -39,7 +39,7 @@ export default function NavBar() {
         <nav className="hidden md:flex space-x-8 lg:space-x-16">
           <NavItem href="/">Home</NavItem>
           <NavItem href="/courses">Course</NavItem>
-          <NavItem href="/jobs">Job</NavItem>
+          <NavItem href="/job">Job</NavItem>
           <NavItem href="/dashboard">Dashboard</NavItem>
         </nav>
         <div className="hidden md:flex space-x-2">

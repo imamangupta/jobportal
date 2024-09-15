@@ -1,0 +1,506 @@
+"use client";
+import React, { useState, useEffect, useCallback } from "react";
+import JobCard from "./JobCard";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import {
+  Search,
+  MapPin,
+  ChevronDown,
+  LayoutGrid,
+  LayoutList,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const dummyJobs = [
+  {
+    id: 1,
+    title: "Senior UX Designer",
+    company: "TechInnovate Solutions",
+    logoColor: "#E57373",
+    location: "Bangalore, Karnataka",
+    jobType: "Full-Time",
+    workType: "Hybrid",
+    experience: "Senior Level",
+    salary: "₹18,00,000 / year",
+    postedTime: "12hrs ago",
+    tags: ["UX Design", "UI/UX", "Figma", "User Research"],
+    jobFunction: "Design",
+  },
+  {
+    id: 2,
+    title: "Frontend Developer",
+    company: "WebWizards India",
+    logoColor: "#64B5F6",
+    location: "Mumbai, Maharashtra",
+    jobType: "Full-Time",
+    workType: "Remote",
+    experience: "Mid Level",
+    salary: "₹12,00,000 / year",
+    postedTime: "1d ago",
+    tags: ["React", "JavaScript", "CSS", "HTML"],
+    jobFunction: "Development",
+  },
+  {
+    id: 3,
+    title: "Product Manager",
+    company: "InnovateX",
+    logoColor: "#81C784",
+    location: "Hyderabad, Telangana",
+    jobType: "Full-Time",
+    workType: "Onsite",
+    experience: "Senior Level",
+    salary: "₹24,00,000 / year",
+    postedTime: "8hrs ago",
+    tags: ["Product Strategy", "Agile", "User Stories", "Roadmapping"],
+    jobFunction: "Product Management",
+  },
+  {
+    id: 4,
+    title: "Data Scientist",
+    company: "AI Solutions India",
+    logoColor: "#4DB6AC",
+    location: "Chennai, Tamil Nadu",
+    jobType: "Full-Time",
+    workType: "Hybrid",
+    experience: "Mid Level",
+    salary: "₹16,00,000 / year",
+    postedTime: "2d ago",
+    tags: ["Python", "Machine Learning", "Data Analysis", "SQL"],
+    jobFunction: "Data Science",
+  },
+  {
+    id: 5,
+    title: "DevOps Engineer",
+    company: "CloudTech India",
+    logoColor: "#FFD54F",
+    location: "Pune, Maharashtra",
+    jobType: "Full-Time",
+    workType: "Remote",
+    experience: "Senior Level",
+    salary: "₹20,00,000 / year",
+    postedTime: "3d ago",
+    tags: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+    jobFunction: "DevOps",
+  },
+  {
+    id: 6,
+    title: "Marketing Specialist",
+    company: "GrowthGenius",
+    logoColor: "#FF8A65",
+    location: "Delhi, NCR",
+    jobType: "Part-Time",
+    workType: "Remote",
+    experience: "Entry Level",
+    salary: "₹6,00,000 / year",
+    postedTime: "4d ago",
+    tags: ["Digital Marketing", "SEO", "Social Media", "Content Creation"],
+    jobFunction: "Marketing",
+  },
+  {
+    id: 7,
+    title: "Backend Developer",
+    company: "ServerSage Solutions",
+    logoColor: "#9575CD",
+    location: "Kolkata, West Bengal",
+    jobType: "Contract",
+    workType: "Remote",
+    experience: "Mid Level",
+    salary: "₹14,00,000 / year",
+    postedTime: "5d ago",
+    tags: ["Node.js", "Python", "MongoDB", "API Development"],
+    jobFunction: "Development",
+  },
+  {
+    id: 8,
+    title: "HR Manager",
+    company: "PeopleFirst Corp",
+    logoColor: "#4DD0E1",
+    location: "Ahmedabad, Gujarat",
+    jobType: "Full-Time",
+    workType: "Onsite",
+    experience: "Senior Level",
+    salary: "₹22,00,000 / year",
+    postedTime: "6d ago",
+    tags: [
+      "Recruitment",
+      "Employee Relations",
+      "Performance Management",
+      "HR Policies",
+    ],
+    jobFunction: "Human Resources",
+  },
+  {
+    id: 9,
+    title: "Mobile App Developer Intern",
+    company: "AppGenius Technologies",
+    logoColor: "#AED581",
+    location: "Indore, Madhya Pradesh",
+    jobType: "Internship",
+    workType: "Hybrid",
+    experience: "Entry Level",
+    salary: "₹25,000 / month",
+    postedTime: "1w ago",
+    tags: ["iOS", "Android", "React Native", "Mobile Development"],
+    jobFunction: "Development",
+  },
+  {
+    id: 10,
+    title: "Sales Executive",
+    company: "RevenuePro Solutions",
+    logoColor: "#FFD54F",
+    location: "Jaipur, Rajasthan",
+    jobType: "Full-Time",
+    workType: "Onsite",
+    experience: "Mid Level",
+    salary: "₹10,00,000 / year",
+    postedTime: "1w ago",
+    tags: ["B2B Sales", "Negotiation", "CRM", "Lead Generation"],
+    jobFunction: "Sales",
+  },
+];
+
+const filterCategories = [
+  {
+    name: "Job Type",
+    options: ["All", "Full-Time", "Part-Time", "Contract", "Internship"],
+  },
+  { name: "Work Type", options: ["Remote", "Onsite", "Hybrid"] },
+  { name: "Experience", options: ["Entry Level", "Mid Level", "Senior Level"] },
+  {
+    name: "Job Function",
+    options: [
+      "Design",
+      "Development",
+      "Product Management",
+      "Data Science",
+      "DevOps",
+      "Marketing",
+      "Human Resources",
+      "Sales",
+    ],
+  },
+];
+
+const indianStates = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+  "Delhi",
+];
+
+const JobMain = () => {
+  const [jobs, setJobs] = useState(dummyJobs);
+  const [filters, setFilters] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const [expandedFilters, setExpandedFilters] = useState({});
+  const [selectedState, setSelectedState] = useState("");
+  const [location, setLocation] = useState("");
+  const [salaryRange, setSalaryRange] = useState([0, 3000000]);
+  const [view, setView] = useState("list");
+
+  const applyFilters = useCallback(() => {
+    const filteredJobs = dummyJobs.filter((job) => {
+      const matchesSearch =
+        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.tags.some((tag) =>
+          tag.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+      const matchesFilters = Object.entries(filters).every(
+        ([category, selectedOptions]) => {
+          if (!selectedOptions || selectedOptions.length === 0) return true;
+
+          switch (category) {
+            case "Job Type":
+              return (
+                selectedOptions.includes(job.jobType) ||
+                selectedOptions.includes("All")
+              );
+            case "Work Type":
+              return selectedOptions.includes(job.workType);
+            case "Experience":
+              return selectedOptions.includes(job.experience);
+            case "Job Function":
+              return selectedOptions.includes(job.jobFunction);
+            default:
+              return true;
+          }
+        }
+      );
+
+      const matchesLocation =
+        !location ||
+        job.location.toLowerCase().includes(location.toLowerCase());
+      const jobSalary = parseInt(job.salary.replace(/[^0-9]/g, ""));
+      const matchesSalary =
+        jobSalary >= salaryRange[0] && jobSalary <= salaryRange[1];
+
+      return (
+        matchesSearch && matchesFilters && matchesLocation && matchesSalary
+      );
+    });
+    setJobs(filteredJobs);
+  }, [searchTerm, filters, location, salaryRange]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [applyFilters]);
+
+  const handleFilterChange = (category, value) => {
+    setFilters((prevFilters) => {
+      const updatedFilters = { ...prevFilters };
+      if (!updatedFilters[category]) {
+        updatedFilters[category] = [];
+      }
+      const index = updatedFilters[category].indexOf(value);
+      if (index > -1) {
+        updatedFilters[category].splice(index, 1);
+      } else {
+        updatedFilters[category].push(value);
+      }
+      if (updatedFilters[category].length === 0) {
+        delete updatedFilters[category];
+      }
+      return updatedFilters;
+    });
+  };
+
+  const toggleFilterExpansion = (category) => {
+    setExpandedFilters((prev) => ({ ...prev, [category]: !prev[category] }));
+  };
+
+  const clearFilters = () => {
+    setFilters({});
+    setSearchTerm("");
+    setLocation("");
+    setSelectedState("");
+    setSalaryRange([0, 3000000]);
+  };
+
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(value);
+  };
+
+  return (
+    <div className="container mx-auto px-4 py-8 bg-[#f8f3ff]">
+      <div className="mb-8 text-center">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          Find Your Dream Job
+        </h1>
+        <p className="text-gray-600">
+          Explore thousands of job opportunities with all the information you
+          need.
+        </p>
+      </div>
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4 bg-white p-6 rounded-lg shadow-md">
+        <div className="relative flex-grow max-w-md">
+          <Input
+            type="text"
+            placeholder="Search jobs, companies, or keywords"
+            className="pl-10 pr-4 py-2"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        </div>
+        <div className="flex flex-wrap items-center gap-4">
+          <Select value={selectedState} onValueChange={setSelectedState}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select state" />
+            </SelectTrigger>
+            <SelectContent>
+              {indianStates.map((state) => (
+                <SelectItem key={state} value={state}>
+                  {state}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <div className="relative flex-grow max-w-xs">
+            <Input
+              type="text"
+              placeholder="Bangalore, Koramangala"
+              className="pl-10 pr-4 py-2"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
+            <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
+          <Button
+            className="bg-green-500 hover:bg-green-600 text-white"
+            onClick={applyFilters}
+          >
+            Search
+          </Button>
+        </div>
+      </div>
+      <div className="flex flex-col md:flex-row gap-8">
+        {/* Filter sidebar */}
+        <div className="w-full h-fit md:w-1/4 bg-white p-6 rounded-lg shadow-md">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold text-gray-800">Filter</h2>
+            <Button
+              variant="link"
+              onClick={clearFilters}
+              className="text-green-500 hover:text-green-600"
+            >
+              Clear all
+            </Button>
+          </div>
+          {filterCategories.map((category) => (
+            <div key={category.name} className="mb-6">
+              <h3
+                className="font-semibold mb-2 flex items-center justify-between cursor-pointer text-gray-700"
+                onClick={() => toggleFilterExpansion(category.name)}
+              >
+                {category.name}
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    expandedFilters[category.name] ? "transform rotate-180" : ""
+                  }`}
+                />
+              </h3>
+              <AnimatePresence>
+                {expandedFilters[category.name] && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {category.options.map((option) => (
+                      <div key={option} className="flex items-center mb-2">
+                        <Checkbox
+                          id={`${category.name}-${option}`}
+                          checked={(filters[category.name] || []).includes(
+                            option
+                          )}
+                          onCheckedChange={() =>
+                            handleFilterChange(category.name, option)
+                          }
+                        />
+                        <label
+                          html={`${category.name}-${option}`}
+                          className="ml-2 text-sm text-gray-600"
+                        >
+                          {option}
+                        </label>
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+          <div className="mb-6">
+            <h3 className="font-semibold mb-2 text-gray-700">Salary Range</h3>
+            <Slider
+              min={0}
+              max={3000000}
+              step={100000}
+              value={salaryRange}
+              onValueChange={setSalaryRange}
+              className="mb-2"
+            />
+            <div className="flex justify-between text-sm text-gray-600">
+              <span>{formatCurrency(salaryRange[0])}</span>
+              <span>{formatCurrency(salaryRange[1])}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Job listings */}
+        <div className="flex-grow">
+          <div className="flex justify-between items-center mb-4 bg-white p-4 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold text-gray-800">
+              Showing results: {jobs.length} Jobs
+            </h2>
+            <div className="flex items-center space-x-4">
+              <span className="text-gray-600">Sort by:</span>
+              <Select defaultValue="newest">
+                <SelectTrigger className="w-[120px]">
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="newest">Newest</SelectItem>
+                  <SelectItem value="oldest">Oldest</SelectItem>
+                </SelectContent>
+              </Select>
+              <div className="flex space-x-2">
+                <Button
+                  variant={view === "list" ? "default" : "outline"}
+                  size="icon"
+                  onClick={() => setView("list")}
+                >
+                  <LayoutList className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant={view === "grid" ? "default" : "outline"}
+                  size="icon"
+                  onClick={() => setView("grid")}
+                >
+                  <LayoutGrid className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div
+            className={
+              view === "grid"
+                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+                : ""
+            }
+          >
+            <AnimatePresence>
+              {jobs.map((job) => (
+                <JobCard key={job.id} job={job} view={view} />
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default JobMain;
