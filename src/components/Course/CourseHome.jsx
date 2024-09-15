@@ -30,7 +30,7 @@ export default function CourseHome() {
 
   return (
     <motion.div
-      className="flex flex-col md:flex-row min-h-screen bg-gray-100"
+      className="flex flex-col md:flex-row min-h-screen bg-[#f8f3ff]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}

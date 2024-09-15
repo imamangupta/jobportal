@@ -10,7 +10,7 @@ export default function Sidebar({ lessons, currentLesson, setCurrentLesson }) {
       initial={{ x: -300, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 100 }}
-      className="w-full lg:w-80 bg-white shadow-lg h-full lg:h-screen" // Ensures the sidebar takes full height in desktop
+      className="w-full lg:w-80 bg-white shadow-lg h-full lg:h-screen mt-6" // Ensures the sidebar takes full height in desktop
     >
       <div className="p-6 rounded-sm  bg-purple-600 text-white">
         <h2 className="text-2xl font-bold">JavaScript Course</h2>
