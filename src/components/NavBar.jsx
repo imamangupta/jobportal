@@ -43,8 +43,12 @@ export default function NavBar() {
           <NavItem href="/dashboard">Dashboard</NavItem>
         </nav>
         <div className="hidden md:flex space-x-2">
-          <Button variant="outline">Sign In</Button>
-          <Button>Free Trial</Button>
+          <Link href={"/signup"}>
+            <Button variant="outline">Sign In</Button>
+          </Link>
+          <Link href={"/login"}>
+            <Button>Log In</Button>
+          </Link>
         </div>
         <button
           className="md:hidden p-2"
@@ -66,13 +70,16 @@ export default function NavBar() {
             <NavItem href="/courses">Course</NavItem>
             <NavItem href="/jobs">Job</NavItem>
             <NavItem href="/dashboard">Dashboard</NavItem>
-    
           </nav>
           <div className="mt-4 space-y-2">
-            <Button variant="outline" className="w-full">
-              Sign In
-            </Button>
-            <Button className="w-full">Free Trial</Button>
+            <Link href={"/signup"}>
+              <Button variant="outline" className="w-full">
+                Sign In
+              </Button>
+            </Link>
+            <Link href={"/login"}>
+              <Button className="w-full">Log In</Button>
+            </Link>
           </div>
         </div>
       )}

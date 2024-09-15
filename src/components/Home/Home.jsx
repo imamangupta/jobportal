@@ -80,7 +80,7 @@ const Home = () => {
         <div className="flex overflow-hidden">
           <div
             ref={logoContainerRef}
-            className="flex justify-center space-x-7 container mx-auto px-4 items-center"
+            className="flex justify-center space-x-7 container  px-4 items-center"
           >
             <img
               className="object-contain w-36 sm:w-44"
