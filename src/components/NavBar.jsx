@@ -66,12 +66,7 @@ export default function NavBar() {
             <NavItem href="/courses">Course</NavItem>
             <NavItem href="/jobs">Job</NavItem>
             <NavItem href="/dashboard">Dashboard</NavItem>
-            <a
-              href="#"
-              className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
-            >
-              Dashboard
-            </a>
+    
           </nav>
           <div className="mt-4 space-y-2">
             <Button variant="outline" className="w-full">

@@ -14,6 +14,8 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@heroicons/react": "^2.1.5",
+    "@mui/icons-material": "^6.1.0",
+    "@mui/material": "^6.1.0",
     "add": "^2.0.6",
     "button": "^1.1.1",
     "chart.js": "^4.4.4",

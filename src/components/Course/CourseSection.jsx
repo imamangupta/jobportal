@@ -91,6 +91,12 @@ const courses = [
   },
 ];
 
+// const router = useRouter
+// const handleRedirect = () => {
+//   // Replace '/course-home' with the actual path of your course home page
+//   router.push('/courses/course-home');
+// };
+
 const FilterOption = ({ label, options, selectedOptions, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
 

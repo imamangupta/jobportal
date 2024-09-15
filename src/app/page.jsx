@@ -1,9 +1,8 @@
-import Home from "../components/Home";
-import SearchCourses from "@/components/SearchCourses";
-import PopularCourses from "@/components/PopularCourses";
-import FAQ from "@/components/FAQ";
-import React from "react";
-import AboutUsDashboard from "@/components/AboutDashboard";
+import AboutUsDashboard from "@/components/Home/AboutDashboard";
+import FAQ from "@/components/Home/FAQ";
+import Home from "@/components/Home/Home";
+import PopularCourses from "@/components/Home/PopularCourses";
+import SearchCourses from "@/components/Home/SearchCourses";
 
 function page() {
   return (

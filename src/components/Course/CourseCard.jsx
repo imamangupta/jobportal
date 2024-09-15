@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { PlayCircle, BookOpen, Clock, Star, Users } from "lucide-react";
+import Link from "next/link";
 
 export default function CourseCard({
   title,
@@ -72,9 +73,11 @@ export default function CourseCard({
             </span>
           ))}
         </div>
-        <button className="w-full bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300">
-          Start Now
-        </button>
+        <Link href={"/courses/course-home"}>
+          <button className="w-full bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300">
+            Start Now
+          </button>
+        </Link>
       </div>
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-1 bg-purple-600"
