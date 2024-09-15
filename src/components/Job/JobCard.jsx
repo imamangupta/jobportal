@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-const JobCard = ({ job, view }) => {
+const JobCard = ({ job, view, handleRoute }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -70,12 +70,14 @@ const JobCard = ({ job, view }) => {
                     variant="outline"
                     size="sm"
                     className="text-gray-600 hover:text-gray-800"
+                    onClick={handleRoute}
                   >
                     View Details
                   </Button>
                   <Button
                     size="sm"
                     className="bg-green-500 hover:bg-green-600 text-white"
+                    onClick={handleRoute}
                   >
                     Apply Now
                   </Button>

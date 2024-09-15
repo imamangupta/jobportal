@@ -20,6 +20,7 @@ import {
   LayoutList,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const dummyJobs = [
   {
@@ -321,6 +322,16 @@ const JobMain = () => {
     }).format(value);
   };
 
+  // routing
+
+
+  const router = useRouter();
+  const handleRoute = (e) => {
+      // console.log('Form submitted:', { email, password })
+      // alert('Sign up successful! Redirecting...')
+      router.push('/job/job-profile')
+  }
+
   return (
     <div className="container mx-auto px-4 py-8 bg-[#f8f3ff]">
       <div className="mb-8 text-center">
@@ -493,7 +504,7 @@ const JobMain = () => {
           >
             <AnimatePresence>
               {jobs.map((job) => (
-                <JobCard key={job.id} job={job} view={view} />
+                <JobCard key={job.id} job={job} view={view} handleRoute={handleRoute} />
               ))}
             </AnimatePresence>
           </div>
