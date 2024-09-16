@@ -44,7 +44,7 @@ const Home = () => {
             </button>
             <button className="border border-purple-500 text-purple-500 px-6 py-3 rounded-lg font-semibold hover:bg-purple-500 hover:text-white transition flex items-center">
               <Play className="mr-2 h-4 w-4" />
-              What's Etech?
+              Whats Etech?
             </button>
           </div>
         </div>

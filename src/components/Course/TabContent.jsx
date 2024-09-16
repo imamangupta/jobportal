@@ -19,7 +19,7 @@ export default function TabContent({ activeTab }) {
             <h3 className="text-lg font-bold mb-2">Course Overview</h3>
             <p className="text-sm text-gray-700">
               This comprehensive JavaScript course will take you from a beginner
-              to an advanced level. You'll learn everything from basic syntax to
+              to an advanced level. You&apos;ll learn everything from basic syntax to
               complex concepts like closures and promises.
             </p>
           </motion.div>
@@ -94,7 +94,7 @@ export default function TabContent({ activeTab }) {
             >
               <p className="font-bold">New Content Alert!</p>
               <p>
-                We've just added a new section on ES6 features. Check it out in
+                We&apos;ve just added a new section on ES6 features. Check it out in
                 Module 5!
               </p>
             </div>

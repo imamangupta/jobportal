@@ -110,7 +110,7 @@ export default function AboutUsDashboard() {
               Our Mission
             </h3>
             <p className="text-gray-600">
-              At CodePathshala, we're committed to bridging the gap between
+              At CodePathshala, we committed to bridging the gap between
               education and employment. Our mission is to provide high-quality,
               industry-relevant courses that not only educate but also prepare
               our students for successful careers in the ever-evolving tech
@@ -146,7 +146,7 @@ export default function AboutUsDashboard() {
                 name: "Alex Johnson",
                 role: "Software Developer",
                 quote:
-                  "Etech's courses were instrumental in helping me transition into tech. I landed my dream job within months of completing my course!",
+                  "Etechs courses were instrumental in helping me transition into tech. I landed my dream job within months of completing my course!",
               },
               {
                 name: "Samantha Lee",
@@ -163,7 +163,7 @@ export default function AboutUsDashboard() {
             ].map((testimonial, index) => (
               <div key={index} className="bg-white p-4 rounded-lg shadow">
                 <p className="text-gray-600 italic mb-4">
-                  "{testimonial.quote}"
+                &ldquo;{testimonial.quote}&ldquo;
                 </p>
                 <p className="text-purple-900 font-semibold">
                   {testimonial.name}

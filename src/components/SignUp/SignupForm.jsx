@@ -137,7 +137,7 @@ export default function SignupForm() {
           </div>
         </div>
         <p className="mt-8 text-xs text-center text-gray-500">
-          By clicking "Sign Up" you agree to our{" "}
+          By clicking Sign Up you agree to our{" "}
           <a href="/terms" className="text-blue-500 hover:underline">
             Terms of Service
           </a>{" "}

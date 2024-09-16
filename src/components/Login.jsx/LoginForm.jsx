@@ -75,7 +75,7 @@ export default function LoginForm() {
       <div className="relative z-10 w-full max-w-md bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow-lg p-8 my-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login to Your Account</h2>
         <p className="text-center text-gray-600 mb-6">
-          Don't have an account?{" "}
+          Dont have an account?{" "}
           <a href="/signup" className="text-blue-500 hover:underline">
             SIGN UP
           </a>
