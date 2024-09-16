@@ -1,6 +1,7 @@
 
 import "./globals.css";
-
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 export const metadata = {
   title: "CodePathshala",
   description: "CodePathshala help to find jobs/intership for newly Student.",
@@ -9,7 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-[#f8f3ff]">
+      <body className="">
         {children}
       </body>
     </html>
