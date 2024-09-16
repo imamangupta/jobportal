@@ -68,7 +68,7 @@ export default function NavBar() {
           <nav className="flex flex-col space-y-4">
             <NavItem href="/">Home</NavItem>
             <NavItem href="/courses">Course</NavItem>
-            <NavItem href="/jobs">Job</NavItem>
+            <NavItem href="/job">Job</NavItem>
             <NavItem href="/dashboard">Dashboard</NavItem>
           </nav>
           <div className="mt-4 space-y-2">

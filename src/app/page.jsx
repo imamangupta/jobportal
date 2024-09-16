@@ -9,13 +9,13 @@ import NavBar from "@/components/NavBar";
 function page() {
   return (
     <div className="bg-[#f8f3ff]">
-      <NavBar/>
+      <NavBar />
       <Home />
       <SearchCourses />
       <PopularCourses />
       <AboutUsDashboard />
       <FAQ />
-      <Footer/>
+      <Footer />
     </div>
   );
 }
