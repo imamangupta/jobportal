@@ -73,12 +73,12 @@ export default function NavBar() {
           </nav>
           <div className="mt-4 space-y-2">
             <Link href={"/signup"}>
-              <Button variant="outline" className="w-full">
+              <Button variant="outline" className="w-full m-2">
                 Sign In
               </Button>
             </Link>
             <Link href={"/login"}>
-              <Button className="w-full">Log In</Button>
+              <Button className="w-full m-2">Log In</Button>
             </Link>
           </div>
         </div>
