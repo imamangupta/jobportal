@@ -40,7 +40,7 @@ const JobCard = ({ job, view, onApply }) => {
               <h3 className="text-lg font-semibold mb-1">{job.title}</h3>
               <p className="text-sm text-gray-600 mb-2">{job.company}</p>
               <div className="flex flex-wrap gap-2 mb-3">
-                <Badge variant="secondary" className="text-xs">
+                <Badge  variant="secondary" className="text-xs">
                   <MapPinIcon className="w-3 h-3 mr-1" />
                   {job.location}
                 </Badge>

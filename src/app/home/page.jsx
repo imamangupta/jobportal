@@ -1,19 +1,16 @@
 import Footer from "@/components/Footer";
-import AboutUsDashboard from "@/components/Home/AboutDashboard";
 import Banner from "@/components/Home/Banner";
 import FAQ from "@/components/Home/FAQ";
 import Home from "@/components/Home/Home";
 import NavbarBanner from "@/components/Home/NavbarBanner";
 import NumberCounter from "@/components/Home/NumberCounter";
-import PopularCourses from "@/components/Home/PopularCourses";
 import SubjectCard from "@/components/Home/SubjectCard";
 import Testimonial from "@/components/Home/Testimonial";
 import WhyChooseUs from "@/components/Home/WhyChooseUs";
-import SearchCourses from "@/components/Home/WhyChooseUs";
 import NavBar from "@/components/NavBar";
 import React from "react";
-import Img1 from "../assets/banner1.png";
-import Img2 from "../assets/banner2.png";
+import Img1 from "@/assets/banner1.png";
+import Img2 from "@/assets/banner2.png";
 
 
 
