@@ -11,6 +11,7 @@ import Img2 from "../assets/banner2.png";
 import SubjectCard from "@/components/Home/SubjectCard";
 import Testimonial from "@/components/Home/Testimonial";
 
+
 const BannerData = {
   image: Img1,
   tag: "CUSTOMIZE WITH YOUR SCHEDULE",
@@ -33,6 +34,7 @@ const BannerData2 = {
 function page() {
   return (
     <div className="overflow-x-hidden">
+      
       <NavBar />
       <NavbarBanner/>
       <Home />
