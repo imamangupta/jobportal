@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-const JobCard = ({ job, view, handleRoute }) => {
+const JobCard = ({ job, view, onApply }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -19,8 +19,8 @@ const JobCard = ({ job, view, handleRoute }) => {
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
     >
-      <Card
-        className={`mb-4 overflow-hidden rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300 ${
+      <Card onClick={onApply}
+        className={`mb-4 overflow-hidden hover:cursor-pointer rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300 ${
           view === "grid" ? "h-full" : ""
         }`}
       >
@@ -70,14 +70,14 @@ const JobCard = ({ job, view, handleRoute }) => {
                     variant="outline"
                     size="sm"
                     className="text-gray-600 hover:text-gray-800"
-                    onClick={handleRoute}
+                    onClick={onApply}
                   >
                     View Details
                   </Button>
                   <Button
                     size="sm"
                     className="bg-green-500 hover:bg-green-600 text-white"
-                    onClick={handleRoute}
+                    onClick={onApply}
                   >
                     Apply Now
                   </Button>

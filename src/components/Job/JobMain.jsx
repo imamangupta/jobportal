@@ -1,6 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
-import JobCard from "./JobCard";
+import React, { useState, useEffect, useCallback, Suspense, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,6 +20,9 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+
+// Lazily import JobCard component to optimize loading
+const JobCard = React.lazy(() => import("./JobCard"));
 
 const dummyJobs = [
   {
@@ -234,8 +236,11 @@ const JobMain = () => {
   const [salaryRange, setSalaryRange] = useState([0, 3000000]);
   const [view, setView] = useState("list");
 
-  const applyFilters = useCallback(() => {
-    const filteredJobs = dummyJobs.filter((job) => {
+  const router = useRouter();
+
+  // Memoize filtered jobs to avoid recalculating when inputs remain unchanged
+  const filteredJobs = useMemo(() => {
+    return dummyJobs.filter((job) => {
       const matchesSearch =
         job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -268,16 +273,18 @@ const JobMain = () => {
       const matchesLocation =
         !location ||
         job.location.toLowerCase().includes(location.toLowerCase());
+
       const jobSalary = parseInt(job.salary.replace(/[^0-9]/g, ""));
       const matchesSalary =
         jobSalary >= salaryRange[0] && jobSalary <= salaryRange[1];
 
-      return (
-        matchesSearch && matchesFilters && matchesLocation && matchesSalary
-      );
+      return matchesSearch && matchesFilters && matchesLocation && matchesSalary;
     });
-    setJobs(filteredJobs);
   }, [searchTerm, filters, location, salaryRange]);
+
+  const applyFilters = useCallback(() => {
+    setJobs(filteredJobs);
+  }, [filteredJobs]);
 
   useEffect(() => {
     applyFilters();
@@ -322,15 +329,9 @@ const JobMain = () => {
     }).format(value);
   };
 
-  // routing
-
-
-  const router = useRouter();
-  const handleRoute = (e) => {
-      // console.log('Form submitted:', { email, password })
-      // alert('Sign up successful! Redirecting...')
-      router.push('/job/job-profile')
-  }
+  const handleRoute = useCallback(() => {
+    router.push("/job/job-profile");
+  }, [router]);
 
   return (
     <div className="container mx-auto px-4 py-8 bg-[#f8f3ff]">
@@ -431,7 +432,7 @@ const JobMain = () => {
                           }
                         />
                         <label
-                          html={`${category.name}-${option}`}
+                          htmlFor={`${category.name}-${option}`}
                           className="ml-2 text-sm text-gray-600"
                         >
                           {option}
@@ -448,10 +449,9 @@ const JobMain = () => {
             <Slider
               min={0}
               max={3000000}
-              step={100000}
+              step={10000}
               value={salaryRange}
               onValueChange={setSalaryRange}
-              className="mb-2"
             />
             <div className="flex justify-between text-sm text-gray-600">
               <span>{formatCurrency(salaryRange[0])}</span>
@@ -461,53 +461,35 @@ const JobMain = () => {
         </div>
 
         {/* Job listings */}
-        <div className="flex-grow">
-          <div className="flex justify-between items-center mb-4 bg-white p-4 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold text-gray-800">
+        <div className="w-full md:w-3/4">
+          <div className="flex justify-end items-center gap-4 mb-4">
+          <h2 className="text-xl font-semibold text-gray-800">
               Showing results: {jobs.length} Jobs
             </h2>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-600">Sort by:</span>
-              <Select defaultValue="newest">
-                <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="newest">Newest</SelectItem>
-                  <SelectItem value="oldest">Oldest</SelectItem>
-                </SelectContent>
-              </Select>
-              <div className="flex space-x-2">
-                <Button
-                  variant={view === "list" ? "default" : "outline"}
-                  size="icon"
-                  onClick={() => setView("list")}
-                >
-                  <LayoutList className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant={view === "grid" ? "default" : "outline"}
-                  size="icon"
-                  onClick={() => setView("grid")}
-                >
-                  <LayoutGrid className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+            <Button
+              variant={view === "list" ? "default" : "ghost"}
+              onClick={() => setView("list")}
+            >
+              <LayoutList />
+            </Button>
+            <Button
+              variant={view === "grid" ? "default" : "ghost"}
+              onClick={() => setView("grid")}
+            >
+              <LayoutGrid />
+            </Button>
           </div>
-          <div
-            className={
-              view === "grid"
-                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
-                : ""
-            }
-          >
-            <AnimatePresence>
+          <Suspense fallback={<div>Loading jobs...</div>}>
+            <div
+              className={`grid gap-4 ${
+                view === "grid" ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
+              }`}
+            >
               {jobs.map((job) => (
-                <JobCard key={job.id} job={job} view={view} handleRoute={handleRoute} />
+                <JobCard key={job.id} job={job} onApply={handleRoute} />
               ))}
-            </AnimatePresence>
-          </div>
+            </div>
+          </Suspense>
         </div>
       </div>
     </div>
