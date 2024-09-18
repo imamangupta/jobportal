@@ -2,13 +2,14 @@
 import Layout from '@/components/Dashboard/Layout'
 import { BaseApiUrl } from '@/utils/constanst';
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../redux/userSlice'
+// import { useDispatch, useSelector } from 'react-redux';
+// import { setUser } from '../redux/userSlice'
 import { useRouter } from "next/navigation";
 
 function page() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const router = useRouter();
+  const [data, setData] = useState([])
   const fetchUser = async () => {
     const response = await fetch(`${BaseApiUrl}/user/`, {
       method: 'GET',
@@ -27,7 +28,17 @@ function page() {
     const json = await response.json();
     if (json) {
       console.log(json);
-      dispatch(setUser(json.user));
+      let newData = {
+
+        userName: json.user.userName,
+        userId: json.user.id,
+        role: json.user.roleName,
+        email: json.user.email
+
+      }
+      setData(newData)
+
+      // dispatch(setUser(json.user));
     }
   }
 
@@ -36,12 +47,12 @@ function page() {
     fetchUser()
   }, [])
 
-  const userdata = useSelector((store) => store.user);
-  
+  // const userdata = useSelector((store) => store.user);
+
 
   return (
     <div>
-      <Layout data={userdata} />
+      <Layout data={data} />
     </div>
   )
 }
