@@ -274,11 +274,11 @@ export default function AdvancedChatbotWithGemini() {
                   {messages.map((msg, index) => (
                     <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} mb-4`}>
                       <div className={`flex items-end ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'} max-w-[80%]`}>
-                        <Avatar className={`h-8 w-8 ${msg.role === 'user' ? 'ml-2' : 'mr-2'}`}>
+                        <Avatar  className={`h-8 w-8 ${msg.role === 'user' ? 'ml-2' : 'mr-2'}`}>
                           {msg.role === 'user' ? (
                             <User className="h-4 w-4" />
                           ) : (
-                            <AvatarImage src="/chatbot-avatar.png" alt="Chatbot" />
+                            <AvatarImage src="https://github.com/shadcn.png" alt="Chatbot" />
                           )}
                           <AvatarFallback>{msg.role === 'user' ? 'U' : 'CB'}</AvatarFallback>
                         </Avatar>
