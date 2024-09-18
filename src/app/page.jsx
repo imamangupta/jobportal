@@ -10,6 +10,7 @@ import Img1 from "../assets/banner1.png";
 import Img2 from "../assets/banner2.png";
 import SubjectCard from "@/components/Home/SubjectCard";
 import Testimonial from "@/components/Home/Testimonial";
+import AdvancedChatbotWithGemini from "@/components/AdvancedChatbotWithGemini";
 
 
 const BannerData = {
@@ -46,6 +47,9 @@ function page() {
       <Testimonial/>
       <FAQ />
       <Footer />
+      <div className="fixed bottom-4 left-4 z-50">
+        <AdvancedChatbotWithGemini />
+      </div>
     </div>
   );
 }

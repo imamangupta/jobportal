@@ -156,7 +156,7 @@ export default function Layout({ data }) {
             initial={{ x: -300 }}
             animate={{ x: 0 }}
             exit={{ x: -300 }}
-            className="w-64 bg-purple-900 text-white p-6"
+            className="w-64 h-screen overflow-auto bg-purple-900 text-white p-6"
           >
             <button onClick={handleRoute} className="text-3xl font-bold mb-8">
               CodePathshala
