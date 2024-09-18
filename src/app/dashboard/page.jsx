@@ -21,7 +21,6 @@ function page() {
     if (!response.ok) {
       // If the response is not OK (e.g., 401 Unauthorized), handle it
       localStorage.removeItem('token');
-      return false;
       router.push("/");
     }
 
@@ -29,8 +28,6 @@ function page() {
     if (json) {
       console.log(json);
       dispatch(setUser(json.user));
-
-      return true;
     }
   }
 
