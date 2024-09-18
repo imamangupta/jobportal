@@ -1,14 +1,15 @@
 'use client'
 import Layout from '@/components/Dashboard/Layout'
 import { BaseApiUrl } from '@/utils/constanst';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { useDispatch, useSelector } from 'react-redux';
 // import { setUser } from '../redux/userSlice'
 import { useRouter } from "next/navigation";
 
-function page() {
+function Page() {
   // const dispatch = useDispatch();
   const router = useRouter();
+
   const [data, setData] = useState([])
   const fetchUser = async () => {
     const response = await fetch(`${BaseApiUrl}/user/`, {
@@ -57,4 +58,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
