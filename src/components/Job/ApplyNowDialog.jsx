@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Toast } from "@/components/ui/toast";
+import { toast } from "sonner";
 
 export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company }) {
   const [name, setName] = useState("");
@@ -26,11 +26,10 @@ export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company }) {
     e.preventDefault();
     // Here you would typically send the form data to your backend
     console.log({ name, email, phone, coverLetter, resume });
-    setShowToast(true);
     setTimeout(() => {
-      setShowToast(false);
+      toast.success('Application Submitted Successfully')
       onClose();
-    }, 3000);
+    }, 1000);
   };
 
   return (

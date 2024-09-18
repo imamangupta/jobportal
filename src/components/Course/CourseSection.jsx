@@ -67,7 +67,7 @@ const courses = [
       "Take your GraphQL skills to the next level. Learn about resolvers, directives, and more.",
     image:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-09-14%20215528-xArQW2gDDDRNBqXvWaYGydqggMXI4U.png",
-    progress: 60,
+    progress: 10,
     duration: "18 hours",
     lessons: 120,
     rating: 4.7,

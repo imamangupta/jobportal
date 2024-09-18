@@ -83,7 +83,7 @@ export default function CourseCard({
         className="absolute bottom-0 left-0 right-0 h-1 bg-purple-600"
         initial={{ width: 0 }}
         animate={{ width: `${progress}%` }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 3 }}
       />
     </motion.div>
   );

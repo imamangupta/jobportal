@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ const Footer = () => {
     e.preventDefault();
     console.log("Subscribed:", email);
     setEmail("");
+    toast.success('Subscribed Successfully')
   };
 
   return (
