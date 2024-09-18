@@ -8,14 +8,17 @@ export const metadata = {
   title: "CodePathshala",
   description: "CodePathshala help to find jobs/intership for newly Student.",
 };
+import { Providers } from "./redux/providers";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="">
-        <Toaster position="top-left"  expand={false} richColors/>
-        <NextTopLoader/>
-        {children}
+        <Providers>
+          <Toaster position="top-left" expand={false} richColors />
+          <NextTopLoader />
+          {children}
+        </Providers>
       </body>
     </html>
   );

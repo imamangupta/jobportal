@@ -2,7 +2,8 @@ import img1 from '../../public/assets/sideCourse.png'
 import img2 from '../../public/assets/macBook.jpg'
 import img3 from '../../public/assets/sampleUser.png'
 
-export const BaseApiUrl = "apilink";
+export const BaseApiUrl = "https://jobportal-backend-wine.vercel.app/api";
+// export const BaseApiUrl = "http://localhost:4000/api";
 
 export const sideCourseImg = img1;
 export const macBookImg = img2;

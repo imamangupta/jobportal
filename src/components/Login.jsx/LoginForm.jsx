@@ -5,6 +5,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Sphere, Box, Text, Float } from '@react-three/drei'
 import { FaGoogle, FaApple } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
+import { BaseApiUrl } from '@/utils/constanst'
 
 function BackgroundScene() {
   const sphereRef = useRef()
@@ -46,21 +47,37 @@ export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isFormValid, setIsFormValid] = useState(false)
-  const router =useRouter()
+  const router = useRouter()
 
   const validateForm = () => {
     const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     const isPasswordValid = password.length >= 6 // Assuming a minimum password length of 6
     setIsFormValid(isEmailValid && isPasswordValid)
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (isFormValid) {
-      // Here you would typically handle the login logic
-      // console.log('Login attempted:', { email, password })
-      // alert('Login successful! Redirecting...')
-      router.push("/home")
-      // You would typically redirect the user or update the app state here
+
+      console.log(email, password);
+
+
+      const response = await fetch(`${BaseApiUrl}/user/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email, password: password })
+      });
+      const json = await response.json();
+
+      if (json) {
+        console.log(json);
+        
+        localStorage.setItem('token', json.data.token)
+        router.push("/dashboard")
+      }
+
+
     }
   }
 
@@ -130,7 +147,7 @@ export default function LoginForm() {
             LOG IN
           </button>
         </form>
-        <div className="mt-6 text-center">
+        {/* <div className="mt-6 text-center">
           <p className="text-gray-600">or</p>
           <div className="mt-4 space-y-3">
             <button
@@ -146,7 +163,7 @@ export default function LoginForm() {
               <FaApple className="mr-2 h-4 w-4" /> Continue with Apple
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

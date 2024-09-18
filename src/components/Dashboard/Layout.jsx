@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BellIcon, SearchIcon, MenuIcon, ChevronDown } from "lucide-react";
+import { BellIcon, SearchIcon, MenuIcon, } from "lucide-react";
 import Dashboard from "./Dashboard";
 import ResumeBuilder from "./ResumeBuilder";
 import Tracking from "./Tracking";
@@ -13,16 +13,6 @@ import Setting from "./Setting";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const sidebarItems = [
-  { name: "Dashboard", icon: "📊", component: Dashboard },
-  { name: "Resume Builder", icon: "📝", component: ResumeBuilder },
-  { name: "Tracking", icon: "🔍", component: Tracking },
-  { name: "Interview", icon: "🎙️", component: Interview },
-  { name: "Message", icon: "💬", component: Message },
-  { name: "News Feed", icon: "📰", component: NewsFeed },
-  { name: "My Profile", icon: "👤", component: MyProfile },
-  { name: "Setting", icon: "⚙️", component: Setting },
-];
 
 const routeItem = [
   { name: "Home", icon: "🏠", path: "/" },
@@ -30,7 +20,41 @@ const routeItem = [
   { name: "Job", icon: "🏢", path: "/job" },
 ];
 
-export default function Layout() {
+export default function Layout({ data }) {
+
+  console.log(data);
+  
+
+  const sidebarItems = [
+    { name: "Dashboard", icon: "📊", component: Dashboard },
+
+    ...(data.role === 'student'
+      ? [
+        { name: "Resume Builder", icon: "📝", component: ResumeBuilder },
+        { name: "My Application", icon: "📝", component: ResumeBuilder },
+        { name: "My Courses", icon: "📝", component: ResumeBuilder },
+        { name: "Message", icon: "💬", component: Message },
+        { name: "My Profile", icon: "👤", component: MyProfile },
+        { name: "Setting", icon: "⚙️", component: Setting },
+      ]
+      : []),
+    ...(data.role === 'company'
+      ? [
+        { name: "Post Job/Inter", icon: "🔍", component: Tracking },
+        { name: "Interview", icon: "🎙️", component: Interview },
+        { name: "Message", icon: "💬", component: Message },
+        { name: "My Profile", icon: "👤", component: MyProfile },
+        { name: "Setting", icon: "⚙️", component: Setting },
+      ]
+      : []),
+
+  ];
+
+
+
+
+
+
   const [activeItem, setActiveItem] = useState("Dashboard");
   const [activeHomeItem, setActiveHomeItem] = useState("/");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -89,6 +113,12 @@ export default function Layout() {
     setActiveItem("My Profile");
   };
 
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    router.push("/");
+  }
+
   const handleNotificationClick = () => {
     setIsNotificationOpen(!isNotificationOpen);
     setNotifications(notifications.map((n) => ({ ...n, isRead: true })));
@@ -138,11 +168,10 @@ export default function Layout() {
                   <motion.div // Use div instead of <a> to avoid <a> nesting
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`block py-2 px-4 my-2 rounded transition-colors duration-200 ${
-                      isClient && window.location.pathname === item.path
-                        ? "bg-indigo-700"
-                        : "hover:bg-indigo-800"
-                    }`}
+                    className={`block py-2 px-4 my-2 rounded transition-colors duration-200 ${isClient && window.location.pathname === item.path
+                      ? "bg-indigo-700"
+                      : "hover:bg-indigo-800"
+                      }`}
                     onClick={() => setActiveHomeItem(item.path)}
                   >
                     <span className="mr-2">{item.icon}</span>
@@ -156,11 +185,10 @@ export default function Layout() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#"
-                  className={`block py-2 px-4 my-2 rounded transition-colors duration-200 ${
-                    activeItem === item.name
-                      ? "bg-indigo-700"
-                      : "hover:bg-indigo-800"
-                  }`}
+                  className={`block py-2 px-4 my-2 rounded transition-colors duration-200 ${activeItem === item.name
+                    ? "bg-indigo-700"
+                    : "hover:bg-indigo-800"
+                    }`}
                   onClick={() => setActiveItem(item.name)}
                 >
                   <span className="mr-2">{item.icon}</span>
@@ -172,6 +200,7 @@ export default function Layout() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="mt-8 w-full bg-indigo-700 hover:bg-indigo-600 py-2 rounded"
+              onClick={handleLogout}
             >
               Log Out
             </motion.button>
@@ -279,12 +308,19 @@ export default function Layout() {
                 className="w-8 h-8 rounded-full"
               />
               <div>
-                <p className="font-semibold">Anima Agrawal</p>
-                <p className="text-sm text-gray-500">New Delhi, India</p>
+                <p className="font-semibold">{data.userName}</p>
+                {/* <p className="text-sm text-gray-500">New Delhi, India</p> */}
               </div>
             </motion.div>
           </div>
         </header>
+
+
+
+
+
+
+
 
         {/* Content */}
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">

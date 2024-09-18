@@ -1,12 +1,14 @@
 'use client'
-
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useEffect } from "react"
 import { ChevronDown, Menu, X } from "lucide-react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
+import { checkToken } from "@/utils/checkToken"
+
 
 const NavItem = ({ href, children, subItems }) => {
   const [isOpen, setIsOpen] = useState(false)
+  
 
   return (
     <div
@@ -55,11 +57,10 @@ const NavItem = ({ href, children, subItems }) => {
 
 const Button = ({ variant = "solid", children, className = "" }) => (
   <button
-    className={`px-4 py-2 rounded font-semibold transition-colors duration-200 ${
-      variant === "outline"
+    className={`px-4 py-2 rounded font-semibold transition-colors duration-200 ${variant === "outline"
         ? "border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white"
         : "bg-purple-500 text-white hover:bg-purple-600"
-    } ${className}`}
+      } ${className}`}
   >
     {children}
   </button>
@@ -109,6 +110,7 @@ const MobileNavItem = ({ item, isOpen, toggleOpen }) => {
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [openItems, setOpenItems] = useState({})
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen((prev) => !prev)
@@ -120,6 +122,14 @@ export default function NavBar() {
       ...prev,
       [index]: !prev[index],
     }))
+  }, [])
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      const tokenValid = await checkToken()
+      setIsAuthenticated(tokenValid)
+    }
+    verifyToken()
   }, [])
 
   const navItems = [
@@ -150,15 +160,19 @@ export default function NavBar() {
         { label: "Resume Builder", href: "/job/resume-builder" },
       ],
     },
-    {
-      label: "Dashboard",
-      href: "/dashboard",
-      subItems: [
-        { label: "My Courses", href: "/dashboard/courses" },
-        { label: "My Applications", href: "/dashboard/applications" },
-        { label: "Settings", href: "/dashboard/settings" },
-      ],
-    },
+    ...(isAuthenticated
+      ? [
+        {
+          label: "Dashboard",
+          href: "/dashboard",
+          subItems: [
+            { label: "My Courses", href: "/dashboard/courses" },
+            { label: "My Applications", href: "/dashboard/applications" },
+            { label: "Settings", href: "/dashboard/settings" },
+          ],
+        },
+      ]
+      : []),
   ]
 
   return (
@@ -173,12 +187,20 @@ export default function NavBar() {
           ))}
         </nav>
         <div className="hidden md:flex space-x-2">
-          <Link href="/signup">
-            <Button variant="outline">Sign In</Button>
-          </Link>
-          <Link href="/login">
-            <Button>Log In</Button>
-          </Link>
+          {isAuthenticated ? (
+            <Link href="/dashboard">
+              <Button>Dashboard</Button>
+            </Link>
+          ) : (
+            <>
+              <Link href="/signup">
+                <Button variant="outline">Sign In</Button>
+              </Link>
+              <Link href="/login">
+                <Button>Log In</Button>
+              </Link>
+            </>
+          )}
         </div>
         <button
           className="md:hidden p-2"
@@ -212,6 +234,7 @@ export default function NavBar() {
           </AnimatePresence>
         </button>
       </div>
+
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -232,15 +255,21 @@ export default function NavBar() {
                 />
               ))}
             </nav>
-            <div className="p-4 space-y-2">
-              <Link href="/signup" onClick={toggleMenu}>
-                <Button variant="outline" className="w-full">
-                  Sign In
-                </Button>
-              </Link>
-              <Link href="/login" onClick={toggleMenu}>
-                <Button className="w-full">Log In</Button>
-              </Link>
+            <div className="flex flex-col space-y-2 p-4">
+              {isAuthenticated ? (
+                <Link href="/dashboard">
+                  <Button>Dashboard</Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/signup">
+                    <Button variant="outline">Sign In</Button>
+                  </Link>
+                  <Link href="/login">
+                    <Button>Log In</Button>
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}
