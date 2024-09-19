@@ -12,6 +12,7 @@ import MyProfile from "./MyProfile";
 import Setting from "./Setting";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import JobPostingManager from "./JobPostingManager";
 
 
 const routeItem = [
@@ -41,6 +42,7 @@ export default function Layout({ data }) {
     ...(data.role === 'company'
       ? [
         { name: "Post Job/Inter", icon: "🔍", component: Tracking },
+        { name: "Post Job New", icon: "🔍", component: JobPostingManager },
         { name: "Interview", icon: "🎙️", component: Interview },
         { name: "Message", icon: "💬", component: Message },
         { name: "My Profile", icon: "👤", component: MyProfile },
