@@ -1,19 +1,19 @@
-import CourseHome from '@/components/Course/CourseHome'
 import Layout from '@/components/Course/Layout'
-import Footer from '@/components/Footer'
+import RoadmapPage from '@/components/Course/RoadmapPage'
 import NavBar from '@/components/NavBar'
 import React from 'react'
 
 function page() {
   return (
     <div>
-        <NavBar/>
-        <Layout>
+<NavBar/>
+<Layout>
       <div className="space-y-6">
-      <CourseHome/>
+      <RoadmapPage/>
       </div>
     </Layout>
-        <Footer/>
+
+
     </div>
   )
 }

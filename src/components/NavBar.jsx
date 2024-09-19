@@ -146,9 +146,10 @@ export default function NavBar() {
       label: "Course",
       href: "/courses",
       subItems: [
-        { label: "Web Development", href: "/courses/web-development" },
-        { label: "Mobile Development", href: "/courses/mobile-development" },
-        { label: "Data Science", href: "/courses/data-science" },
+        { label: "Roadmap", href: "/courses/roadmap" },
+        { label: "Code Editor", href: "/courses/code-editor" },
+        { label: "Mock Test", href: "/courses/tests" },
+        { label: "Doubt Solver", href: "/courses/doubt-solver" },
       ],
     },
     {
