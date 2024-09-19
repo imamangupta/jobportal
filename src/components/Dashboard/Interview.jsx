@@ -1,48 +1,58 @@
-"use client";
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { PlusIcon, MinusIcon } from 'lucide-react'
+"use client"; // This is required for Next.js client-side rendering
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { PlusIcon, MinusIcon } from "lucide-react";
+import { useRouter } from "next/navigation"; // For handling routing
 
 const Interview = () => {
+  const router = useRouter();
   const [interviews, setInterviews] = useState([
     {
       id: 1,
-      company: 'TechCorp India',
-      position: 'Senior Developer',
-      date: '2023-06-01',
-      notes: 'Prepare for system design and coding questions.',
+      company: "TechCorp India",
+      position: "Senior Developer",
+      date: "2023-06-01",
+      notes: "Prepare for system design and coding questions.",
     },
-  ])
+  ]);
 
   const [newInterview, setNewInterview] = useState({
-    company: '',
-    position: '',
-    date: '',
-    notes: '',
-  })
+    company: "",
+    position: "",
+    date: "",
+    notes: "",
+  });
 
+  // Handle input changes for adding new interviews
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setNewInterview((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setNewInterview((prev) => ({ ...prev, [name]: value }));
+  };
 
+  // Add a new interview to the list
   const addInterview = () => {
     if (newInterview.company && newInterview.position && newInterview.date) {
       setInterviews((prev) => [
         ...prev,
         { id: prev.length + 1, ...newInterview },
-      ])
-      setNewInterview({ company: '', position: '', date: '', notes: '' })
+      ]);
+      setNewInterview({ company: "", position: "", date: "", notes: "" });
     }
-  }
+  };
 
+  // Remove an interview from the list
   const removeInterview = (id) => {
-    setInterviews((prev) => prev.filter((interview) => interview.id !== id))
-  }
+    setInterviews((prev) => prev.filter((interview) => interview.id !== id));
+  };
+
+  // Redirect to the InterviewRoom page with a unique roomID
+  const startInterview = (roomID) => {
+    router.push(`/interview/${roomID}`); // Route correctly to the new structure
+  };
 
   const [commonQuestions] = useState([
     "Tell me about yourself.",
@@ -50,7 +60,7 @@ const Interview = () => {
     "What are your strengths and weaknesses?",
     "Describe a challenging project you've worked on.",
     "How do you handle tight deadlines?",
-  ])
+  ]);
 
   return (
     <motion.div
@@ -98,9 +108,15 @@ const Interview = () => {
               <CardTitle>{interview.company}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p><strong>Position:</strong> {interview.position}</p>
-              <p><strong>Date:</strong> {interview.date}</p>
-              <p><strong>Notes:</strong> {interview.notes}</p>
+              <p>
+                <strong>Position:</strong> {interview.position}
+              </p>
+              <p>
+                <strong>Date:</strong> {interview.date}
+              </p>
+              <p>
+                <strong>Notes:</strong> {interview.notes}
+              </p>
               <Button
                 variant="destructive"
                 onClick={() => removeInterview(interview.id)}
@@ -108,19 +124,29 @@ const Interview = () => {
               >
                 <MinusIcon className="mr-2 h-4 w-4" /> Remove
               </Button>
+              <Button
+                onClick={() => startInterview(interview.id)}
+                className="mt-4"
+              >
+                Start Interview
+              </Button>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      <h3 className="text-xl font-semibold mb-4">Common Interview Questions</h3>
+      <h3 className="text-xl font-semibold mb-4">
+        Common Interview Questions
+      </h3>
       <ul className="list-disc pl-6">
         {commonQuestions.map((question, index) => (
-          <li key={index} className="mb-2">{question}</li>
+          <li key={index} className="mb-2">
+            {question}
+          </li>
         ))}
       </ul>
     </motion.div>
-  )
-}
+  );
+};
 
-export default Interview
+export default Interview;

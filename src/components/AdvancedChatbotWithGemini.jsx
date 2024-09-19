@@ -278,7 +278,7 @@ export default function AdvancedChatbotWithGemini() {
                           {msg.role === 'user' ? (
                             <User className="h-4 w-4" />
                           ) : (
-                            <AvatarImage src="https://github.com/shadcn.png" alt="Chatbot" />
+                            <AvatarImage src="https://images3.alphacoders.com/818/thumbbig-818125.webp" className="w-full h-full object-cover" alt="Chatbot" />
                           )}
                           <AvatarFallback>{msg.role === 'user' ? 'U' : 'CB'}</AvatarFallback>
                         </Avatar>

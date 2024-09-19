@@ -35,6 +35,7 @@
     "@react-three/drei": "^9.112.0",
     "@react-three/fiber": "^8.17.7",
     "@reduxjs/toolkit": "^2.2.7",
+    "@zegocloud/zego-uikit-prebuilt": "^2.9.1",
     "add": "^2.0.6",
     "button": "^1.1.1",
     "chart.js": "^4.4.4",
