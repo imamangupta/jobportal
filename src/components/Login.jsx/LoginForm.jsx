@@ -37,7 +37,7 @@ function BackgroundScene() {
         anchorX="center"
         anchorY="middle"
       >
-        CodePathshal
+        CodePathshala
       </Text>
     </>
   )
