@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { BaseApiUrl } from "@/utils/constanst";
 
 // Lazily import JobCard component to optimize loading
 const JobCard = React.lazy(() => import("./JobCard"));
@@ -227,7 +228,9 @@ const indianStates = [
 ];
 
 const JobMain = () => {
-  const [jobs, setJobs] = useState(dummyJobs);
+
+  const [postJob, setPostJob] = useState([]);
+  const [jobs, setJobs] = useState(postJob);
   const [filters, setFilters] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedFilters, setExpandedFilters] = useState({});
@@ -240,7 +243,7 @@ const JobMain = () => {
 
   // Memoize filtered jobs to avoid recalculating when inputs remain unchanged
   const filteredJobs = useMemo(() => {
-    return dummyJobs.filter((job) => {
+    return jobs.filter((job) => {
       const matchesSearch =
         job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -329,9 +332,30 @@ const JobMain = () => {
     }).format(value);
   };
 
-  const handleRoute = useCallback(() => {
-    router.push("/job/job-profile");
-  }, [router]);
+  // const handleRoute = useCallback(() => {
+  //   router.push("/job/job-profile");
+  // }, [router]);
+
+  const fetchJobPost = async ()=>{
+    const response = await fetch(`${BaseApiUrl}/job`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const json = await response.json();
+
+    if (json) {
+      console.log(json.job);
+      setPostJob(json.job)
+      setJobs(json.job)
+    }
+  }
+
+  useEffect(() => {
+    fetchJobPost()
+  }, [])
+  
 
   return (
     <div className="container mx-auto px-4 py-8 bg-[#f8f3ff]">
@@ -486,7 +510,7 @@ const JobMain = () => {
               }`}
             >
               {jobs.map((job) => (
-                <JobCard key={job.id} job={job} onApply={handleRoute} />
+                <JobCard key={job.id} job={job}  />
               ))}
             </div>
           </Suspense>

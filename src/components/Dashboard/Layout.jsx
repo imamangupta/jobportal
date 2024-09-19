@@ -23,7 +23,7 @@ const routeItem = [
 
 export default function Layout({ data }) {
 
-  console.log(data);
+  // console.log(data);
   
 
   const sidebarItems = [
@@ -69,9 +69,7 @@ export default function Layout({ data }) {
   const searchRef = useRef(null);
   const notificationRef = useRef(null);
 
-  const ActiveComponent =
-    sidebarItems.find((item) => item.name === activeItem)?.component ||
-    Dashboard;
+  const ActiveComponent = sidebarItems.find((item) => item.name === activeItem)?.component || Dashboard;
 
   useEffect(() => {
     const results = sidebarItems.filter((item) =>
@@ -334,7 +332,7 @@ export default function Layout({ data }) {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
             >
-              <ActiveComponent />
+              <ActiveComponent data={data} />
             </motion.div>
           </AnimatePresence>
         </main>

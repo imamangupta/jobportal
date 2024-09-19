@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,8 +10,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { PlusIcon, Pencil, Trash2 } from 'lucide-react'
+import { BaseApiUrl } from '@/utils/constanst'
+import CreateJob from './component/createJob'
 
-const JobPostingManager = () => {
+const JobPostingManager = ({data}) => {
+  // console.log('jobpostingmamadk',data);
+  
   const [jobPosts, setJobPosts] = useState([
     {
       id: "1",
@@ -47,104 +51,35 @@ const JobPostingManager = () => {
     },
   ])
 
-  const [open, setOpen] = useState(false)
-  const [editingId, setEditingId] = useState(null)
-  const [newJobPost, setNewJobPost] = useState({
-    id: "",
-    title: "",
-    company: "",
-    logoColor: "#000000",
-    location: "",
-    jobType: "",
-    workType: "",
-    experience: "",
-    salary: "",
-    description: "",
-    qualifications: [""],
-    responsibilities: [""],
-    attachments: [{ title: "", image: "" }],
-    postedTime: "",
-    applicants: "",
-    tags: [""],
-    jobFunction: "",
-  })
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setNewJobPost((prev) => ({ ...prev, [name]: value }))
-  }
 
-  const handleArrayInputChange = (index, field, value) => {
-    setNewJobPost((prev) => ({
-      ...prev,
-      [field]: prev[field].map((item, i) => (i === index ? value : item)),
-    }))
-  }
+  
 
-  const handleAttachmentChange = (index, field, value) => {
-    setNewJobPost((prev) => ({
-      ...prev,
-      attachments: prev.attachments.map((item, i) =>
-        i === index ? { ...item, [field]: value } : item
-      ),
-    }))
-  }
+ 
 
-  const addField = (field) => {
-    setNewJobPost((prev) => ({
-      ...prev,
-      [field]: [...prev[field], field === 'attachments' ? { title: '', image: '' } : ''],
-    }))
-  }
 
-  const addOrUpdateJobPost = () => {
-    if (newJobPost.title && newJobPost.company) {
-      if (editingId) {
-        setJobPosts((prev) =>
-          prev.map((post) => (post.id === editingId ? { ...newJobPost, id: editingId } : post))
-        )
-      } else {
-        setJobPosts((prev) => [
-          ...prev,
-          { ...newJobPost, id: String(prev.length + 1) },
-        ])
+ 
+
+  const fetchjobUser = async()=>{
+    const response = await fetch(`${BaseApiUrl}/job/userid`, {
+      method: 'GET',
+      headers: {
+        'userid':data._id
       }
-      setNewJobPost({
-        id: "",
-        title: "",
-        company: "",
-        logoColor: "#000000",
-        location: "",
-        jobType: "",
-        workType: "",
-        experience: "",
-        salary: "",
-        description: "",
-        qualifications: [""],
-        responsibilities: [""],
-        attachments: [{ title: "", image: "" }],
-        postedTime: "",
-        applicants: "",
-        tags: [""],
-        jobFunction: "",
-      })
-      setEditingId(null)
-      setOpen(false)
+    });
+    const json = await response.json();
+
+    if (json) {
+      console.log(json);
+      setJobPosts(json.job)
+     
     }
   }
 
-  const editJobPost = (id) => {
-    const postToEdit = jobPosts.find((post) => post.id === id)
-    if (postToEdit) {
-      setNewJobPost(postToEdit)
-      setEditingId(id)
-      setOpen(true)
-    }
-  }
-
-  const deleteJobPost = (id) => {
-    setJobPosts((prev) => prev.filter((post) => post.id !== id))
-  }
+  useEffect(() => {
+    fetchjobUser()
+  }, [])
+  
 
   return (
     <motion.div
@@ -154,127 +89,8 @@ const JobPostingManager = () => {
     >
       <h2 className="text-2xl font-semibold mb-6">Job Posting Manager</h2>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button className="mb-6">
-            <PlusIcon className="mr-2 h-4 w-4" /> Create New Job Post
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>{editingId ? 'Edit Job Post' : 'Create New Job Post'}</DialogTitle>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="title">Job Title</Label>
-                <Input id="title" name="title" value={newJobPost.title} onChange={handleInputChange} />
-              </div>
-              <div>
-                <Label htmlFor="company">Company</Label>
-                <Input id="company" name="company" value={newJobPost.company} onChange={handleInputChange} />
-              </div>
-              <div>
-                <Label htmlFor="logoColor">Logo Color</Label>
-                <Input id="logoColor" name="logoColor" type="color" value={newJobPost.logoColor} onChange={handleInputChange} />
-              </div>
-              <div>
-                <Label htmlFor="location">Location</Label>
-                <Input id="location" name="location" value={newJobPost.location} onChange={handleInputChange} />
-              </div>
-              <div>
-                <Label htmlFor="jobType">Job Type</Label>
-                <Input id="jobType" name="jobType" value={newJobPost.jobType} onChange={handleInputChange} />
-              </div>
-              <div>
-                <Label htmlFor="workType">Work Type</Label>
-                <Input id="workType" name="workType" value={newJobPost.workType} onChange={handleInputChange} />
-              </div>
-              <div>
-                <Label htmlFor="experience">Experience</Label>
-                <Input id="experience" name="experience" value={newJobPost.experience} onChange={handleInputChange} />
-              </div>
-              <div>
-                <Label htmlFor="salary">Salary</Label>
-                <Input id="salary" name="salary" value={newJobPost.salary} onChange={handleInputChange} />
-              </div>
-              <div>
-                <Label htmlFor="jobFunction">Job Function</Label>
-                <Input id="jobFunction" name="jobFunction" value={newJobPost.jobFunction} onChange={handleInputChange} />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="description">Description</Label>
-              <Textarea id="description" name="description" value={newJobPost.description} onChange={handleInputChange} />
-            </div>
-            <div>
-              <Label>Qualifications</Label>
-              {newJobPost.qualifications.map((qual, index) => (
-                <Input
-                  key={index}
-                  value={qual}
-                  onChange={(e) => handleArrayInputChange(index, 'qualifications', e.target.value)}
-                  className="mb-2"
-                />
-              ))}
-              <Button type="button" onClick={() => addField('qualifications')} size="sm">Add Qualification</Button>
-            </div>
-            <div>
-              <Label>Responsibilities</Label>
-              {newJobPost.responsibilities.map((resp, index) => (
-                <Input
-                  key={index}
-                  value={resp}
-                  onChange={(e) => handleArrayInputChange(index, 'responsibilities', e.target.value)}
-                  className="mb-2"
-                />
-              ))}
-              <Button type="button" onClick={() => addField('responsibilities')} size="sm">Add Responsibility</Button>
-            </div>
-            <div>
-              <Label>Attachments</Label>
-              {newJobPost.attachments.map((att, index) => (
-                <div key={index} className="flex space-x-2 mb-2">
-                  <Input
-                    value={att.title}
-                    onChange={(e) => handleAttachmentChange(index, 'title', e.target.value)}
-                    placeholder="Title"
-                  />
-                  <Input
-                    value={att.image}
-                    onChange={(e) => handleAttachmentChange(index, 'image', e.target.value)}
-                    placeholder="Image URL"
-                  />
-                </div>
-              ))}
-              <Button type="button" onClick={() => addField('attachments')} size="sm">Add Attachment</Button>
-            </div>
-            <div>
-              <Label>Tags</Label>
-              {newJobPost.tags.map((tag, index) => (
-                <Input
-                  key={index}
-                  value={tag}
-                  onChange={(e) => handleArrayInputChange(index, 'tags', e.target.value)}
-                  className="mb-2"
-                />
-              ))}
-              <Button type="button" onClick={() => addField('tags')} size="sm">Add Tag</Button>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="postedTime">Posted Time</Label>
-                <Input id="postedTime" name="postedTime" value={newJobPost.postedTime} onChange={handleInputChange} />
-              </div>
-              <div>
-                <Label htmlFor="applicants">Applicants</Label>
-                <Input id="applicants" name="applicants" value={newJobPost.applicants} onChange={handleInputChange} />
-              </div>
-            </div>
-          </div>
-          <Button onClick={addOrUpdateJobPost}>{editingId ? 'Update Job Post' : 'Add Job Post'}</Button>
-        </DialogContent>
-      </Dialog>
+      <CreateJob data={data}/>
+   
 
       <Table>
         <TableHeader>
