@@ -33,8 +33,8 @@ export default function Layout({ data }) {
       ? [
         { name: "Resume Builder", icon: "📝", component: ResumeBuilder },
         { name: "My Application", icon: "📝", component: ResumeBuilder },
-        { name: "My Courses", icon: "📝", component: ResumeBuilder },
         { name: "Message", icon: "💬", component: Message },
+        { name: "Interview", icon: "🎙️", component: Interview },
         { name: "My Profile", icon: "👤", component: MyProfile },
         { name: "Setting", icon: "⚙️", component: Setting },
       ]
