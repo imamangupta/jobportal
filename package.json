@@ -37,6 +37,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "@zegocloud/zego-uikit-prebuilt": "^2.9.1",
     "add": "^2.0.6",
+    "axios": "^1.7.7",
     "button": "^1.1.1",
     "chart.js": "^4.4.4",
     "class-variance-authority": "^0.7.0",
