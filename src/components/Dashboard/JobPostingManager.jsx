@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Label } from "@/components/ui/label"
 import { PlusIcon, Pencil, Trash2 } from 'lucide-react'
 import { BaseApiUrl } from '@/utils/constanst'
-import CreateJob from './component/createJob'
+import CreateJob from './component/CreateJob'
 
 const JobPostingManager = ({data}) => {
   // console.log('jobpostingmamadk',data);
