@@ -145,11 +145,7 @@ export default function JobListingPage() {
   const params = useParams()
   const [jobData, setJobData] = useState([])
 
-  console.log(params);
-
   const fetchJobPost = async()=>{
-    console.log('wrokd');
-    
     const response = await fetch(`${BaseApiUrl}/job/id`, {
       method: 'GET',
       headers: {
@@ -159,7 +155,6 @@ export default function JobListingPage() {
     const json = await response.json();
 
     if (json) {
-      console.log(json.json);
       setJobData(json.job)
     }
   }

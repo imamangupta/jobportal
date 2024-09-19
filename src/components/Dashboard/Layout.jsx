@@ -41,8 +41,7 @@ export default function Layout({ data }) {
       : []),
     ...(data.role === 'company'
       ? [
-        { name: "Post Job/Inter", icon: "🔍", component: Tracking },
-        { name: "Post Job New", icon: "🔍", component: JobPostingManager },
+        { name: "Post New Job", icon: "🔍", component: JobPostingManager },
         { name: "Interview", icon: "🎙️", component: Interview },
         { name: "Message", icon: "💬", component: Message },
         { name: "My Profile", icon: "👤", component: MyProfile },

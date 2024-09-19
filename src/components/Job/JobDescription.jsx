@@ -83,7 +83,24 @@ export default function JobDescription({ job }) {
               {tag}
             </Badge>
           ))} */}
+             <Badge  variant="secondary">
+              {job.experience}
+            </Badge>
+             <Badge  variant="secondary">
+              {job.jobType}
+            </Badge>
+             <Badge  variant="secondary">
+              {job.salary}
+            </Badge>
+             <Badge  variant="secondary">
+              {job.workType}
+            </Badge>
+             <Badge  variant="secondary">
+              {job.experience}
+            </Badge>
         </div>
+        <h3 className="font-semibold mb-2">Skills</h3>
+        <p className="text-sm text-muted-foreground mb-4">{job.tags}</p>
         <h3 className="font-semibold mb-2">About this role</h3>
         <p className="text-sm text-muted-foreground mb-4">{job.description}</p>
         <h3 className="font-semibold mb-2">Qualification</h3>
@@ -94,7 +111,7 @@ export default function JobDescription({ job }) {
         <ul className="list-disc list-inside text-sm text-muted-foreground mb-4">
           {job.responsibilities}
         </ul>
-        <h3 className="font-semibold mb-2">Attachment</h3>
+        {/* <h3 className="font-semibold mb-2">Attachment</h3> */}
         {/* <div className="grid grid-cols-2 gap-4">
           {job.attachments.map((attachment, index) => (
             <Card key={index} className="overflow-hidden">

@@ -13,6 +13,19 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 const JobCard = ({ job, view }) => {
+  const formatAMPM = (date) => {
+    const hours = date.getHours() % 12 || 12;  // Convert 0 to 12 for 12 AM
+    const minutes = String(date.getMinutes()).padStart(2, '0');  // Pad single-digit minutes with 0
+    const ampm = date.getHours() >= 12 ? 'PM' : 'AM';
+    
+    return `${hours}:${minutes} ${ampm}`;
+  };
+  
+  const extractTime = (isoString) => {
+    const date = new Date(isoString);  // Convert the ISO string to a Date object
+    return formatAMPM(date);  // Format and return the time
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -24,6 +37,8 @@ const JobCard = ({ job, view }) => {
         className={`mb-4 overflow-hidden hover:cursor-pointer rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300 ${view === "grid" ? "h-full" : ""
           }`}
       >
+        <Link href={`/job/${job._id}`}>
+        
         <CardContent className="p-6">
           <div
             className={`flex ${view === "grid" ? "flex-col" : "items-start"}`}
@@ -62,7 +77,7 @@ const JobCard = ({ job, view }) => {
               <div className="flex justify-between items-center">
                 <div className="flex items-center text-gray-500">
                   <CalendarIcon className="w-4 h-4 mr-1" />
-                  <span className="text-xs">{job.postedTime}</span>
+                  <span className="text-xs">{extractTime(job.date)}</span>
                 </div>
                 <div className="space-x-2">
                   <Link href={`/job/${job._id}`}>
@@ -86,6 +101,7 @@ const JobCard = ({ job, view }) => {
             </div>
           </div>
         </CardContent>
+        </Link>
       </Card>
     </motion.div>
   );
