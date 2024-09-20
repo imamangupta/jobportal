@@ -1,3 +1,4 @@
+// app/components/ApplicantsTable.jsx
 'use client'
 
 import React, { useEffect, useState } from 'react'
@@ -7,10 +8,7 @@ import { Button } from "@/components/ui/button"
 import { MessageSquare } from 'lucide-react'
 import { BaseApiUrl } from '@/utils/constanst'
 
-// Dummy data for demonstration
-
-
-const ApplicantsTable = ({ jobId, onChatClick ,post }) => {
+const ApplicantsTable = ({ jobId, onChatClick }) => {
   const [applicants, setApplicants] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -30,10 +28,7 @@ const ApplicantsTable = ({ jobId, onChatClick ,post }) => {
         setApplicants(json.app)
       }
       
-      // setTimeout(() => {
-      //   setApplicants(dummyApplicants)
-        setIsLoading(false)
-      // }, 1000)
+      setIsLoading(false)
     } catch (error) {
       console.error("Error fetching applicants:", error)
       setIsLoading(false)
@@ -63,7 +58,6 @@ const ApplicantsTable = ({ jobId, onChatClick ,post }) => {
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Phone</TableHead>
-             
                 <TableHead>Resume</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
@@ -80,7 +74,6 @@ const ApplicantsTable = ({ jobId, onChatClick ,post }) => {
                   <TableCell>{applicant.userName}</TableCell>
                   <TableCell>{applicant.email}</TableCell>
                   <TableCell>{applicant.phone}</TableCell>
-                
                   <TableCell>
                     <Button variant="link" onClick={() => window.open(`/resume/${applicant.studentId}`, '_blank')}>
                       View Resume

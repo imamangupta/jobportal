@@ -2,16 +2,16 @@
 
 import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Pencil, Trash2, Eye, MessageSquare } from 'lucide-react'
+import { Pencil, Trash2, Eye } from 'lucide-react'
 import { BaseApiUrl } from '@/utils/constanst'
 import CreateJob from './component/CreateJob'
-import ApplicantsTable from './ApplicantsTable'
 import EditJob from './component/EditJob'
 
 const JobPostingManager = ({data}) => {
+  const router = useRouter()
   const [jobPosts, setJobPosts] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -41,11 +41,6 @@ const JobPostingManager = ({data}) => {
     fetchjobUser()
   }, [])
 
-  const editJobPost = (id) => {
-    // Implement edit functionality
-    console.log("Edit job post with id:", id)
-  }
-
   const deleteJobPost = async (id) => {
     try {
       await fetch(`${BaseApiUrl}/job/${id}`, {
@@ -60,11 +55,8 @@ const JobPostingManager = ({data}) => {
     }
   }
 
-  const redirectToChat = (applicantId) => {
-    // Implement chat redirection
-    console.log("Redirect to chat with applicant id:", applicantId)
-    // You can use Next.js router to redirect to the chat page
-    // router.push(`/chat/${applicantId}`)
+  const viewApplicants = (jobId, jobTitle) => {
+    router.push(`/applicants/${jobId}?title=${encodeURIComponent(jobTitle)}`)
   }
 
   return (
@@ -120,20 +112,10 @@ const JobPostingManager = ({data}) => {
                         <Trash2 className="h-4 w-4 mr-2" />
                         Delete
                       </Button>
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button variant="outline" size="sm">
-                            <Eye className="h-4 w-4 mr-2" />
-                            View Applicants
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-4xl">
-                          <DialogHeader>
-                            <DialogTitle>Applicants for {post.title}</DialogTitle>
-                          </DialogHeader>
-                          <ApplicantsTable  jobId={post._id} onChatClick={redirectToChat} />
-                        </DialogContent>
-                      </Dialog>
+                      <Button variant="outline" size="sm" onClick={() => viewApplicants(post._id, post.title)}>
+                        <Eye className="h-4 w-4 mr-2" />
+                        View Applicants
+                      </Button>
                     </div>
                   </TableCell>
                 </motion.tr>
