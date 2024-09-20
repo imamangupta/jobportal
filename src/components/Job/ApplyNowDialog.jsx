@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Toast } from "@radix-ui/react-toast";
 import { BaseApiUrl } from "@/utils/constanst";
+import { useRouter } from 'next/navigation'
 
 export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company,job }) {
   const [name, setName] = useState("");
@@ -23,6 +24,7 @@ export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company,job 
   const [coverLetter, setCoverLetter] = useState("");
   const [resume, setResume] = useState('');
   const [showToast, setShowToast] = useState(false);
+  const router = useRouter()
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -34,28 +36,41 @@ export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company,job 
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
-
+    
     if (!response.ok) {
       // If the response is not OK (e.g., 401 Unauthorized), handle it
       localStorage.removeItem('token');
       router.push("/");
     }
-
+    
+    // console.log({ name, email, phone, coverLetter, resume,"crateterid": job.createdby,"userid":json.user.id });
     const json = await response.json();
     if (json) {
       console.log(json);
-      let newData = {
 
-        userName: json.user.userName,
-        userId: json.user.id,
-        role: json.user.roleName,
-        email: json.user.email
+      const response2 = await fetch(`${BaseApiUrl}/app/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({    
+          userName: name,
+          email: email,
+          phone: phone,
+          cover: coverLetter,
+          companyId: job.createdby,
+          studentId: json.user.id,
+        jobid:job._id })
+      });
+      const json2 = await response2.json();
 
+      if (json2) {
+      
+        router.push("/dashboard")
       }
-      setData(newData)
 
       // dispatch(setUser(json.user));
-      console.log({ name, email, phone, coverLetter, resume,"crateterid": job.createrid,"userid":json.user.id });
+      console.log({ name, email, phone, coverLetter, resume,"crateterid": job.createdby,"userid":json.user.id });
     }
 
 
