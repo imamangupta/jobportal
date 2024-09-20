@@ -17,7 +17,7 @@ const FAQ = () => {
         Any questions? we Got you:-
         </h1>
         <p className="font-[500] text-[1rem] lg:text-[1.2rem] w-full lg:w-[90%]">
-        Got questions? We've got answers! Our dedicated support team is here to help with any inquiries you have about courses, enrollment, or anything else. Reach out anytime, and we'll make sure you get the information you need 
+        Got questions? We got answers! Our dedicated support team is here to help with any inquiries you have about courses, enrollment, or anything else. Reach out anytime, and well make sure you get the information you need 
         </p>
         <button className="w-[max-content] h-[max-content] text-purple-600 font-[500] flex items-center justify-center gap-2">
           More FAQs
