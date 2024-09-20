@@ -52,6 +52,12 @@ function Page() {
 
   return (
     <>
+    
+    <div className="text-center mt-6 mb-6">
+        <button onClick={handleDownload} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
+          Download as PDF
+        </button>
+      </div>
       <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg mt-6" ref={resumeRef}>
         <div className="flex items-center justify-between">
           <div>
@@ -121,11 +127,6 @@ function Page() {
         </div>
       </div>
 
-      <div className="text-center mt-6">
-        <button onClick={handleDownload} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">
-          Download as PDF
-        </button>
-      </div>
     </>
   );
 }

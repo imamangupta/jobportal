@@ -31,7 +31,7 @@ function Page() {
       console.log(json);
       let newData = {
 
-        userName: json.user.userName,
+        userName: json?.user?.userName,
         userId: json.user.id,
         role: json.user.roleName,
         email: json.user.email
