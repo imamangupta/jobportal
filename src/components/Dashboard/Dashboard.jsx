@@ -95,10 +95,10 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Profile Strength and Job Details */}
+      Profile Strength and Job Details
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Profile Strength */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="bg-white rounded-lg shadow p-6"
@@ -139,10 +139,10 @@ export default function Dashboard() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Job Details */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           className="bg-white rounded-lg shadow p-6"
@@ -175,11 +175,11 @@ export default function Dashboard() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
 
       {/* Popular Job */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="bg-white rounded-lg shadow p-6"
@@ -213,10 +213,10 @@ export default function Dashboard() {
             </motion.div>
           ))}
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Job Market Insights */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="bg-white rounded-lg shadow p-6"
@@ -227,7 +227,7 @@ export default function Dashboard() {
             <li key={index}>{insight}</li>
           ))}
         </ul>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 }
