@@ -169,9 +169,9 @@ export default function TestPage() {
                       <CardTitle>Test Results</CardTitle>
                       {isTimeUp && (
                         <Alert variant="destructive">
-                          <AlertTitle>Time's Up!</AlertTitle>
+                          <AlertTitle>Times Up!</AlertTitle>
                           <AlertDescription>
-                            You didn't complete the test within the time limit.
+                            You didnt complete the test within the time limit.
                           </AlertDescription>
                         </Alert>
                       )}
