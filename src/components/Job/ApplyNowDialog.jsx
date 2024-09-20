@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Toast } from "@radix-ui/react-toast";
+import { BaseApiUrl } from "@/utils/constanst";
 
 export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company,job }) {
   const [name, setName] = useState("");
@@ -23,11 +24,41 @@ export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company,job 
   const [resume, setResume] = useState('');
   const [showToast, setShowToast] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Here you would typically send the form data to your backend
+    const response = await fetch(`${BaseApiUrl}/user/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
 
-    console.log({ name, email, phone, coverLetter, resume,job });
+    if (!response.ok) {
+      // If the response is not OK (e.g., 401 Unauthorized), handle it
+      localStorage.removeItem('token');
+      router.push("/");
+    }
+
+    const json = await response.json();
+    if (json) {
+      console.log(json);
+      let newData = {
+
+        userName: json.user.userName,
+        userId: json.user.id,
+        role: json.user.roleName,
+        email: json.user.email
+
+      }
+      setData(newData)
+
+      // dispatch(setUser(json.user));
+      console.log({ name, email, phone, coverLetter, resume,"crateterid": job.createrid,"userid":json.user.id });
+    }
+
+
 
 
 

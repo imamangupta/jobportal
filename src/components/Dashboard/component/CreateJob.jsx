@@ -60,7 +60,7 @@ export default function CreateJob({ data }) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "createdby": data._id,
+                "createdby": data.userId,
                 "title": newJobPost.title,
                 "company": newJobPost.company,
                 "logoColor": newJobPost.logoColor,
