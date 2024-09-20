@@ -1,7 +1,13 @@
-as a student
-email:-
-password:-
 
-as a Company/Hr
-email:-
-password:-
+## As a Student
+
+**Email:** 
+
+**password:** 
+
+## As a Hr/Company
+
+**Email:** 
+
+**password:** 
+
