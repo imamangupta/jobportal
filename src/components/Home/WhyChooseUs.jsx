@@ -46,11 +46,11 @@ const WhyChooseData = [
 ];
 const WhyChooseUs = () => {
   return (
-    <div className="bg-[#f9fafc]" id="why-choose-us">
+    <div className="bg-white" id="why-choose-us">
       <div className="container py-24">
         {/* header section */}
         <div className="space-y-4 p-6 text-center max-w-[500px] mx-auto mb-5">
-          <h1 className="uppercase font-semibold text-orange-600">
+          <h1 className="uppercase font-semibold text-purple-800">
             Why Choose Us
           </h1>
           <p className="font-semibold text-3xl">

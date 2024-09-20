@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { PlayCircle, BookOpen, Clock, Star, Users } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function CourseCard({
   id,
@@ -26,6 +27,14 @@ export default function CourseCard({
     Advanced: "bg-rose-500",
   };
 
+  const router = useRouter()
+
+  const goto=()=>{
+    router.push(`/courses/${id}`)
+    console.log("chutiya");
+  }
+  
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -35,8 +44,8 @@ export default function CourseCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="aspect-video relative overflow-hidden">
-        <img src={image} alt={title} className="object-cover w-full h-full" />
+      <div onClick={goto} className="aspect-video relative overflow-hidden">
+        <img  src={image} alt={title} className="object-cover w-full h-full" />
         <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
           <PlayCircle className="w-16 h-16 text-white" />
         </div>
