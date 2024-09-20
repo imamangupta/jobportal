@@ -1,13 +1,16 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useEffect, useRef,useState } from 'react';
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { PlusIcon, MinusIcon } from 'lucide-react'
 import Link from "next/link"
+import { useRouter } from 'next/navigation'
+import { BaseApiUrl } from '@/utils/constanst';
 
-const ResumeBuilder = () => {
+const ResumeBuilder = ({data}) => {
+  const router = useRouter()
   const [resume, setResume] = useState({
     personalInfo: {
       name: '',
@@ -100,11 +103,68 @@ const ResumeBuilder = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Resume data:', resume)
-    // Here you would typically send the resume data to your backend or generate a PDF
+
+    const response = await fetch(`${BaseApiUrl}/resume`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userid: data.userId, data: resume })
+    });
+    const json = await response.json();
+    console.log(data);
+    
+    if (json) {
+      console.log( "working",json);
+      
+    
+      router.push(`/resume/${data.userId}`)
+    }
+    
   }
+
+
+
+  const fetchUser = async () => {
+    const response = await fetch(`${BaseApiUrl}/resume`, {
+      method: 'GET',
+      headers: {
+        'userid':data.userId
+      }
+    });
+
+  
+
+    const json = await response.json();
+    if (json) {
+      console.log(json.resume[0].data[0]);
+      let newdata = json.resume[0].data[0]
+
+      setResume({
+        personalInfo: {
+          name: newdata.personalInfo.name,
+          email: '',
+          phone: '',
+          location: '',
+        },
+        summary: '',
+        experience: [{ company: '', position: '', duration: '', description: '' }],
+        education: [{ institution: '', degree: '', year: '' }],
+        skills: [''],
+      })
+    
+ 
+
+      // dispatch(setUser(json.user));
+    }
+  }
+
+
+  useEffect(() => {
+    fetchUser()
+  }, [])
 
   return (
     <motion.div
@@ -113,7 +173,7 @@ const ResumeBuilder = () => {
       className="bg-white rounded-lg shadow p-6 max-w-4xl mx-auto"
     >
       <div>
-        <Link href={'/resume/jalds'}><Button type="button" >
+        <Link href={`/resume/${data.userId}`}><Button type="button" >
             View Resume
           </Button></Link>
       </div>
