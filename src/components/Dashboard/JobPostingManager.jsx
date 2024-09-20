@@ -22,6 +22,7 @@ const JobPostingManager = ({data}) => {
 
   
 
+ console.log(data);
  
 
 
@@ -31,7 +32,7 @@ const JobPostingManager = ({data}) => {
     const response = await fetch(`${BaseApiUrl}/job/userid`, {
       method: 'GET',
       headers: {
-        'jobid':data._id
+        'userid':data.userId
       }
     });
     const json = await response.json();
