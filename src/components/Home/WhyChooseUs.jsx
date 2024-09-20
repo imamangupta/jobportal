@@ -1,44 +1,45 @@
 "use client"
 import React from "react";
-import { GrYoga } from "react-icons/gr";
-import { FaDumbbell } from "react-icons/fa6";
-import { GiGymBag } from "react-icons/gi";
+import { IoIosDocument } from "react-icons/io";
+import { FaVideo } from "react-icons/fa";
+import { MdWork } from "react-icons/md";
+import { RiRoadMapFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 import { SlideLeft } from "../../utils/animation";
 
 const WhyChooseData = [
   {
     id: 1,
-    title: "One-on-one Teaching",
-    desc: "All of our special education experts have a degree in special education.",
-    icon: <GrYoga />,
+    title: "Resume Optimization Tool",
+    desc: "Unlock your full potential with our AI-powered Resume Builder, designed to help you create a standout professional profile tailored to your career goals. ",
+    icon: <IoIosDocument />,
     bgColor: "#0063ff",
     delay: 0.3,
   },
   {
     id: 2,
-    title: "24/7 Tutor Availability",
-    desc: "Our tutors are always available to respond as quick as possible for you",
+    title: "Courses for All Fields ",
+    desc: "Explore our diverse range of courses designed to cater to a wide array of disciplines and interests. ",
     link: "/",
-    icon: <FaDumbbell />,
+    icon: <FaVideo />,
     bgColor: "#73bc00",
     delay: 0.6,
   },
   {
     id: 3,
-    title: "Interactive Whiteboard",
-    desc: "Our digital whiteboard equipped with audio and video chat fetures.",
+    title: "Job Portal for All Professions ",
+    desc: "Welcome to our comprehensive job portal designed to connect talented individuals with diverse career opportunities across all professions.",
     link: "/",
-    icon: <GiGymBag />,
+    icon: <MdWork/>,
     bgColor: "#fa6400",
     delay: 0.9,
   },
   {
     id: 4,
-    title: "Affordable Prices",
-    desc: "Choose an expert tutor based on your budget and per hour.",
+    title: "Career Roadmap ",
+    desc: "Navigate your journey to success with our carefully crafted career roadmap, designed to guide you through every stage of your professional development. ",
     link: "/",
-    icon: <GiGymBag />,
+    icon: <RiRoadMapFill />,
     bgColor: "#fe6baa",
     delay: 0.9,
   },
@@ -53,7 +54,7 @@ const WhyChooseUs = () => {
             Why Choose Us
           </h1>
           <p className="font-semibold text-3xl">
-            Benefits of online tutoring services with us
+          Benefits of Choosing Our Online Platform 
           </p>
         </div>
         {/* cards section */}

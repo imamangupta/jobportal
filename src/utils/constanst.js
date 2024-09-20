@@ -87,22 +87,22 @@ export const PopularCoursesCardData = [
 export const FAQData = [
     {
         id: 1,
-        question: 'Lorem, ipsum dolor?',
-        answer: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore officia culpa rem doloremque distinctio.'
+        question: 'How do I enroll in a course?',
+        answer: 'Enrolling is easy! Simply browse our course catalog, select the course youre interested in, and click on the "Enroll" button. Follow the prompts to complete your registration and payment. Youll receive immediate access to your course materials. '
     },
     {
         id: 2,
-        question: 'Lorem, ipsum dolor?',
-        answer: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore officia culpa rem doloremque distinctio.'
+        question: 'What if I have trouble accessing my course? ',
+        answer: 'If youre having trouble accessing your course, our support team is here to help. Contact us through the support page or email us directly, and well assist you in resolving any issues quickly.'
     },
     {
         id: 3,
-        question: 'Lorem, ipsum dolor?',
-        answer: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore officia culpa rem doloremque distinctio.'
+        question: 'Can I get a refund if I’m not satisfied with a course?',
+        answer: 'We offer a satisfaction guarantee on many of our courses. If youre not satisfied, please reach out within the refund period specified in our refund policy. Our team will work with you to address your concerns or process a refund as needed. '
     },
     {
         id: 4,
-        question: 'Lorem, ipsum dolor?',
-        answer: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum tempore officia culpa rem doloremque distinctio.'
+        question: 'Are the courses accredited?',
+        answer: 'Many of our courses are accredited or recognized by industry leaders and professional organizations. Check the course details page for specific accreditation information to ensure it meets your professional or educational requirements.'
     }
 ];

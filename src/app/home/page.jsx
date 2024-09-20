@@ -15,19 +15,19 @@ import AdvancedChatbotWithGemini from "@/components/AdvancedChatbotWithGemini";
 
 const BannerData = {
   image: Img1,
-  tag: "CUSTOMIZE WITH YOUR SCHEDULE",
-  title: "Personalized Professional Online Tutor on Your Schedule",
+  tag: "Learn at Your Own Pace",
+  title: "Embrace the Freedom to Learn at Your Own Pace: Tailor Your Educational Journey to Fit Your Unique Schedule and Goals! ",
   subtitle:
-    "Our scheduling system allows you to select based on your free time. Lorem ipsum demo text for template. Keep track of your students class and tutoring schedules, and never miss your lectures. The best online class scheduling system with easy accessibility.Lorem ipsum is a placeholder text commonly used to demonstrate the visual form",
+    "Experience the freedom and flexibility to learn at your own pace, allowing you to tailor your educational journey to fit your unique schedule, learning preferences, and personal goals. With our self-paced courses, you can take the time to thoroughly grasp complex concepts, revisit materials as needed, and progress through the curriculum without the pressure of strict deadlines.",
   link: "#",
 };
 
 const BannerData2 = {
   image: Img2,
-  tag: "CUSTOMIZE WITH YOUR SCHEDULE",
-  title: "Talented and Qualified Tutors to Serve You for Help",
+  tag: "Explore Job Opportunities at Your Own Pace",
+  title: "Discover Your Future: Explore Job Opportunities at Your Own Pace and Tailor Your Career Path to Fit Your Unique Aspirations! ",
   subtitle:
-    "Our scheduling system allows you to select based on your free time. Lorem ipsum demo text for template. Keep track of your students class and tutoring schedules, and never miss your lectures. The best online class scheduling system with easy accessibility. Lorem ipsum is a placeholder text commonly used",
+    "Discover career opportunities that fit your schedule with our job portal. Browse listings without pressure and use customizable filters to find roles aligned with your skills. Take your time to research companies and perfect your applications while balancing your commitments. Navigate your professional journey confidently and on your own terms! ",
   link: "#",
 };
 
