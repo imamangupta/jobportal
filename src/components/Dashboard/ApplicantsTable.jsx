@@ -8,45 +8,32 @@ import { MessageSquare } from 'lucide-react'
 import { BaseApiUrl } from '@/utils/constanst'
 
 // Dummy data for demonstration
-const dummyApplicants = [
-  {
-    id: 1,
-    fullName: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+1 234 567 8901",
-    coverLetterUrl: "https://example.com/coverletter1.pdf",
-    resumeUrl: "https://example.com/resume1.pdf"
-  },
-  {
-    id: 2,
-    fullName: "Jane Smith",
-    email: "jane.smith@example.com",
-    phone: "+1 987 654 3210",
-    coverLetterUrl: "https://example.com/coverletter2.pdf",
-    resumeUrl: "https://example.com/resume2.pdf"
-  }
-]
 
-const ApplicantsTable = ({ jobId, onChatClick }) => {
+
+const ApplicantsTable = ({ jobId, onChatClick ,post }) => {
   const [applicants, setApplicants] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   const fetchApplicants = async () => {
     setIsLoading(true)
     try {
-      // For demonstration, we're using dummy data
-      // In a real application, you would fetch from the API
-      // const response = await fetch(`${BaseApiUrl}/job/${jobId}/applicants`, {
-      //   method: 'GET',
-      // });
-      // const json = await response.json();
-      // setApplicants(json.applicants)
+      const response = await fetch(`${BaseApiUrl}/app/jobid`, {
+        method: 'GET',
+        headers: {
+          'jobid': "66ed48ca324510b342de0e13"
+        }
+      });
+      const json = await response.json();
 
-      // Simulating API call with setTimeout
-      setTimeout(() => {
-        setApplicants(dummyApplicants)
+      if (json) {
+        console.log(json);
+        setApplicants(json.app)
+      }
+      
+      // setTimeout(() => {
+      //   setApplicants(dummyApplicants)
         setIsLoading(false)
-      }, 1000)
+      // }, 1000)
     } catch (error) {
       console.error("Error fetching applicants:", error)
       setIsLoading(false)
@@ -73,10 +60,10 @@ const ApplicantsTable = ({ jobId, onChatClick }) => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Full Name</TableHead>
+                <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Phone</TableHead>
-                <TableHead>Cover Letter</TableHead>
+             
                 <TableHead>Resume</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
@@ -90,16 +77,12 @@ const ApplicantsTable = ({ jobId, onChatClick }) => {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <TableCell>{applicant.fullName}</TableCell>
+                  <TableCell>{applicant.userName}</TableCell>
                   <TableCell>{applicant.email}</TableCell>
                   <TableCell>{applicant.phone}</TableCell>
+                
                   <TableCell>
-                    <Button variant="link" onClick={() => window.open(applicant.coverLetterUrl, '_blank')}>
-                      View Cover Letter
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="link" onClick={() => window.open(applicant.resumeUrl, '_blank')}>
+                    <Button variant="link" onClick={() => window.open(`/resume/${applicant.studentId}`, '_blank')}>
                       View Resume
                     </Button>
                   </TableCell>

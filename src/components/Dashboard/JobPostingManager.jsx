@@ -9,6 +9,7 @@ import { Pencil, Trash2, Eye, MessageSquare } from 'lucide-react'
 import { BaseApiUrl } from '@/utils/constanst'
 import CreateJob from './component/CreateJob'
 import ApplicantsTable from './ApplicantsTable'
+import EditJob from './component/EditJob'
 
 const JobPostingManager = ({data}) => {
   const [jobPosts, setJobPosts] = useState([])
@@ -114,10 +115,7 @@ const JobPostingManager = ({data}) => {
                   <TableCell>{post.experience}</TableCell>
                   <TableCell>
                     <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" onClick={() => editJobPost(post.id)}>
-                        <Pencil className="h-4 w-4 mr-2" />
-                        Edit
-                      </Button>
+                      <EditJob job={post}/>
                       <Button variant="destructive" size="sm" onClick={() => deleteJobPost(post.id)}>
                         <Trash2 className="h-4 w-4 mr-2" />
                         Delete
@@ -133,7 +131,7 @@ const JobPostingManager = ({data}) => {
                           <DialogHeader>
                             <DialogTitle>Applicants for {post.title}</DialogTitle>
                           </DialogHeader>
-                          <ApplicantsTable jobId={post.id} onChatClick={redirectToChat} />
+                          <ApplicantsTable  jobId={post._id} onChatClick={redirectToChat} />
                         </DialogContent>
                       </Dialog>
                     </div>
