@@ -125,7 +125,7 @@ export default function CreateJob({ data }) {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        <SelectItem value="Internship">Intership</SelectItem>
+                                        <SelectItem value="Internship">Internship</SelectItem>
                                         <SelectItem value="Full-Time">Full-Time</SelectItem>
                                         <SelectItem value="Part-Time">Part-Time</SelectItem>
                                         <SelectItem value="Contract">Contract</SelectItem>
