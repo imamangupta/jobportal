@@ -11,8 +11,7 @@ import NavBar from "@/components/NavBar";
 import React from "react";
 import Img1 from "@/assets/banner1.png";
 import Img2 from "@/assets/banner2.png";
-
-
+import AdvancedChatbotWithGemini from "@/components/AdvancedChatbotWithGemini";
 
 const BannerData = {
   image: Img1,
@@ -24,7 +23,7 @@ const BannerData = {
 };
 
 const BannerData2 = {
-  image:Img2,
+  image: Img2,
   tag: "CUSTOMIZE WITH YOUR SCHEDULE",
   title: "Talented and Qualified Tutors to Serve You for Help",
   subtitle:
@@ -32,22 +31,23 @@ const BannerData2 = {
   link: "#",
 };
 
-
-
 function page() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <NavBar />
-      <NavbarBanner/>
+      <NavbarBanner />
       <Home />
-      <NumberCounter/>
-      <WhyChooseUs/>
-      <Banner {...BannerData}/>
-      <Banner {...BannerData2} reverse={true}/>
-      <SubjectCard/>
-      <Testimonial/>
+      <NumberCounter />
+      <WhyChooseUs />
+      <Banner {...BannerData} />
+      <Banner {...BannerData2} reverse={true} />
+      <SubjectCard />
+      <Testimonial />
       <FAQ />
       <Footer />
+      <div className="fixed bottom-4 left-4 z-50">
+        <AdvancedChatbotWithGemini />
+      </div>
     </div>
   );
 }
