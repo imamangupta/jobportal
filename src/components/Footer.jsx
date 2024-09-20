@@ -10,9 +10,26 @@ const Footer = () => {
     e.preventDefault();
     console.log("Subscribed:", email);
     setEmail("");
-    toast.success('Subscribed Successfully')
+    toast.success("Subscribed Successfully");
   };
 
+//Footer Links
+
+const linkPaths = {
+  "About Us": "/#about-us",  
+ "Services": "/#why-choose-us",
+  "Community": "#community",
+  "Testimonials": "/#testimonial",
+  "Help Center": "#help-center",
+  "Tweet @ Us": "#tweet-us",
+  "Webinars": "#webinars",
+  "Feedback": "/feedback",
+  "Courses": "/courses",
+  "Job": "/job",
+  "Resume Builder": "/dashboard",
+  "Roadmap": "/courses/roadmap",
+};
+  
   return (
     <footer className="bg-gradient-to-br from-pink-400 to-purple-600 text-white pt-20 pb-8 relative">
       <div className="absolute top-0 left-0 right-0 h-16 bg-[#f8f3ff] rounded-b-[100%]" />
@@ -112,7 +129,7 @@ const Footer = () => {
             },
             {
               title: "Links",
-              links: ["Courses", "Become Teacher", "Service", "All in One"],
+              links: ["Courses", "Job", "Resume Builder", "Roadmap"],
             },
           ].map((column, index) => (
             <div key={column.title}>
@@ -121,7 +138,7 @@ const Footer = () => {
                 {column.links.map((link) => (
                   <li key={link}>
                     <a
-                      href="#"
+                      href={linkPaths[link]} // Link to section in the same page
                       className="hover:text-purple-200 transition duration-300"
                     >
                       {link}

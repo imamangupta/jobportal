@@ -5,7 +5,7 @@ import { SlideUp } from "../../utils/animation";
 
 const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
   return (
-    <div className="bg-[#f9f9f9] pb-14">
+    <div className="bg-[#f9f9f9] pb-14" id="about-us">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 space-y-6 md:space-y-0">
           {/* banner Image section */}
