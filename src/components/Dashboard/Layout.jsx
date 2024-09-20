@@ -147,7 +147,7 @@ export default function Layout({ data }) {
   }, []);
 
   return (
-    <div className="flex h-screen bg-[#f8f3ff]">
+    <div className="flex h-screen">
       {/* Sidebar */}
       <AnimatePresence>
         {isSidebarOpen && (
@@ -184,7 +184,7 @@ export default function Layout({ data }) {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#"
-                  className={`block py-2 px-4 my-2 rounded transition-colors duration-200 ${activeItem === item.name
+                  className={`block py-2 px-4 my-2 rounded transition-colors duration-200  ${activeItem === item.name
                     ? "bg-indigo-700"
                     : "hover:bg-indigo-800"
                     }`}
@@ -210,7 +210,7 @@ export default function Layout({ data }) {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="bg-white shadow-sm p-4 flex justify-between items-center">
+        <header className="bg-white shadow-sm m-2 p-4 flex justify-between items-center">
           <div className="flex items-center">
             <motion.button
               whileHover={{ scale: 1.1 }}

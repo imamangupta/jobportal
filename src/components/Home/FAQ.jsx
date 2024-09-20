@@ -10,7 +10,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="w-full h-full bg-[#f8f3ff] flex flex-col lg:flex-row items-center justify-between gap-6 px-6 lg:px-20 py-10">
+    <div className="w-full h-full bg-[#f8f3ff] flex flex-col lg:flex-row items-center justify-between gap-6 px-6 lg:px-20 py-10" id="FAQ">
       {/* Left Section */}
       <div className="w-full lg:w-[50%] flex flex-col items-start gap-6 lg:gap-[2rem]">
         <h1 className="font-[700] text-[2rem] lg:text-[4rem] w-full lg:w-[90%] leading-tight">

@@ -32,7 +32,7 @@ const linkPaths = {
   
   return (
     <footer className="bg-gradient-to-br from-pink-400 to-purple-600 text-white pt-20 pb-8 relative">
-      <div className="absolute top-0 left-0 right-0 h-16 bg-[#f8f3ff] rounded-b-[100%]" />
+      <div className="absolute top-0 left-0 right-0 h-16 bg-white rounded-b-[100%]" />
       <div className="container mx-auto px-4 relative">
         <motion.div
           initial={{ y: 20, opacity: 0 }}

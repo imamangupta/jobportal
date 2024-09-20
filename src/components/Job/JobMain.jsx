@@ -194,7 +194,7 @@ const JobMain = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-[#f8f3ff]">
+    <div className="container mx-auto px-4 py-8">
       <div className="mb-8 text-center">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           Find Your Dream Job
