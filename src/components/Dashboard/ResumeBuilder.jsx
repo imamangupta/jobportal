@@ -114,7 +114,7 @@ const ResumeBuilder = ({data}) => {
       body: JSON.stringify({ userid: data.userId, data: resume })
     });
     const json = await response.json();
-    console.log(data);
+    console.log(data.userId,resume);
     
     if (json) {
       console.log( "working",json);
@@ -139,22 +139,25 @@ const ResumeBuilder = ({data}) => {
 
     const json = await response.json();
     if (json) {
-      console.log(json.resume[0].data[0]);
-      let newdata = json.resume[0].data[0]
-
-      setResume({
-        personalInfo: {
-          name: newdata.personalInfo.name,
-          email: newdata.personalInfo.email,
-          phone: newdata.personalInfo.phone,
-          location: newdata.personalInfo.location,
-        },
-        summary: newdata.summary,
-        experience: newdata.experience,
-        // experience: [{ company: '', position: '', duration: '', description: '' }],
-        education: newdata.education,
-        skills: newdata.skills,
-      })
+      if(json.resume.length !== 0){
+        console.log(json.resume[0].data[0]);
+        let newdata = json.resume[0].data[0]
+  
+        setResume({
+          personalInfo: {
+            name: newdata.personalInfo.name,
+            email: newdata.personalInfo.email,
+            phone: newdata.personalInfo.phone,
+            location: newdata.personalInfo.location,
+          },
+          summary: newdata.summary,
+          experience: newdata.experience,
+          // experience: [{ company: '', position: '', duration: '', description: '' }],
+          education: newdata.education,
+          skills: newdata.skills,
+        })
+      }
+     
     
  
 
