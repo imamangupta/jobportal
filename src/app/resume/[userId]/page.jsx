@@ -86,8 +86,8 @@ function Page() {
           <h2 className="text-2xl font-semibold text-gray-900">Skills</h2>
           <ul className="list-disc list-inside mt-2 text-gray-700">
             
-            {data?.skills?.map((skill) => (
-              <li>{skill}</li>
+            {data?.skills?.map((skill,index) => (
+              <li key={index}>{skill}</li>
             ))}
           </ul>
         </div>
@@ -96,8 +96,8 @@ function Page() {
 
         <div>
           <h2 className="text-2xl font-semibold text-gray-900">Work Experience</h2>
-          {data?.experience?.map((exp) => (
-            <div className="mt-4">
+          {data?.experience?.map((exp,index) => (
+            <div className="mt-4" key={index}>
               <h3 className="text-xl font-semibold text-gray-800">{exp.position} - {exp.company}</h3>
               <p className="text-gray-600">{exp.duration}</p>
               <p className="text-gray-700 mt-2">{exp.description}</p>
@@ -112,8 +112,8 @@ function Page() {
         <div>
           <h2 className="text-2xl font-semibold text-gray-900">Education</h2>
 
-          {data?.education?.map((exp) => (
-            <div className="mt-4">
+          {data?.education?.map((exp, index) => (
+            <div className="mt-4" key={index}>
               <h3 className="text-xl font-semibold text-gray-800">{exp.degree}</h3>
               <p className="text-gray-600">{exp.institution}</p>
               <p className="text-gray-700 mt-2">{exp.year}</p>
