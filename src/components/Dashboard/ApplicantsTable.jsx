@@ -20,7 +20,7 @@ const ApplicantsTable = ({ jobId, onChatClick ,post }) => {
       const response = await fetch(`${BaseApiUrl}/app/jobid`, {
         method: 'GET',
         headers: {
-          'jobid': "66ed48ca324510b342de0e13"
+          'jobid': jobId
         }
       });
       const json = await response.json();
