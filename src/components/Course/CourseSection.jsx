@@ -3,93 +3,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Filter, ChevronDown } from "lucide-react";
 import CourseCard from "./CourseCard";
+import { courses } from "@/utils/courses";
 
-const courses = [
-  {
-    title: "Ultimate JavaScript Course",
-    description:
-      "Master JavaScript from basics to advanced concepts. Includes ES6+, async programming, and more.",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-09-14%20215528-xArQW2gDDDRNBqXvWaYGydqggMXI4U.png",
-    progress: 75,
-    duration: "20 hours",
-    lessons: 150,
-    rating: 4.9,
-    tags: ["JavaScript", "Web Development"],
-    difficulty: "Intermediate",
-    students: 15000,
-  },
-  {
-    title: "Sanity.io Tutorials in Hindi",
-    description:
-      "Learn Sanity.io, the ultimate content platform, with hands-on projects and real-world applications.",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-09-14%20215528-xArQW2gDDDRNBqXvWaYGydqggMXI4U.png",
-    progress: 50,
-    duration: "15 hours",
-    lessons: 100,
-    rating: 4.7,
-    tags: ["Sanity.io", "CMS", "Hindi"],
-    difficulty: "Beginner",
-    students: 8000,
-  },
-  {
-    title: "Strapi Tutorial For Beginners",
-    description:
-      "Dive into Strapi, the open-source headless CMS. Build powerful APIs and manage content like a pro.",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-09-14%20215528-xArQW2gDDDRNBqXvWaYGydqggMXI4U.png",
-    progress: 25,
-    duration: "12 hours",
-    lessons: 80,
-    rating: 4.8,
-    tags: ["Strapi", "Headless CMS"],
-    difficulty: "Beginner",
-    students: 10000,
-  },
-  {
-    title: "React Native Masterclass",
-    description:
-      "Build cross-platform mobile apps with React Native. From setup to deployment, cover it all.",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-09-14%20215528-xArQW2gDDDRNBqXvWaYGydqggMXI4U.png",
-    progress: 10,
-    duration: "25 hours",
-    lessons: 200,
-    rating: 4.9,
-    tags: ["React Native", "Mobile Development"],
-    difficulty: "Advanced",
-    students: 12000,
-  },
-  {
-    title: "GraphQL Advanced Concepts",
-    description:
-      "Take your GraphQL skills to the next level. Learn about resolvers, directives, and more.",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-09-14%20215528-xArQW2gDDDRNBqXvWaYGydqggMXI4U.png",
-    progress: 10,
-    duration: "18 hours",
-    lessons: 120,
-    rating: 4.7,
-    tags: ["GraphQL", "API"],
-    difficulty: "Advanced",
-    students: 7000,
-  },
-  {
-    title: "Docker for Developers",
-    description:
-      "Master Docker containerization. From basic concepts to orchestration with Kubernetes.",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202024-09-14%20215528-xArQW2gDDDRNBqXvWaYGydqggMXI4U.png",
-    progress: 40,
-    duration: "16 hours",
-    lessons: 110,
-    rating: 4.8,
-    tags: ["Docker", "DevOps"],
-    difficulty: "Intermediate",
-    students: 9000,
-  },
-];
+
 
 // const router = useRouter
 // const handleRedirect = () => {
