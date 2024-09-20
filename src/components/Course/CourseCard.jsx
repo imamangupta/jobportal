@@ -5,6 +5,7 @@ import { PlayCircle, BookOpen, Clock, Star, Users } from "lucide-react";
 import Link from "next/link";
 
 export default function CourseCard({
+  id,
   title,
   description,
   image,
@@ -15,6 +16,7 @@ export default function CourseCard({
   tags = [],
   difficulty,
   students,
+  link,
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -57,7 +59,7 @@ export default function CourseCard({
             <Clock className="w-4 h-4 mr-1" /> {duration}
           </span>
           <span className="flex items-center">
-            <BookOpen className="w-4 h-4 mr-1" /> {lessons} lessons
+            <BookOpen className="w-4 h-4 mr-1" /> {Array.isArray(lessons) ? lessons.length : lessons} lessons
           </span>
           <span className="flex items-center">
             <Users className="w-4 h-4 mr-1" /> {students} students
@@ -73,11 +75,12 @@ export default function CourseCard({
             </span>
           ))}
         </div>
-        <Link href={"/courses/course-home"}>
-          <button className="w-full bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300">
-            Start Now
-          </button>
-        </Link>
+        <Link href={`/courses/${id}`}>
+  <button className="w-full bg-purple-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300">
+    Start Now
+  </button>
+</Link>
+
       </div>
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-1 bg-purple-600"

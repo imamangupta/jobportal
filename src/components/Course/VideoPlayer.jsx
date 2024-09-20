@@ -19,7 +19,7 @@ export default function VideoPlayer({ lesson, videoUrl }) {
       transition={{ duration: 0.5 }}
       className="bg-white rounded-lg shadow-lg overflow-hidden h-full"
     >
-      <div className="relative pt-[56.25%] h-3/4">
+      <div className="relative pt-[56.25%] h-0">
         {/* Conditionally render iframe if video is playing */}
         {isPlaying ? (
           <iframe
