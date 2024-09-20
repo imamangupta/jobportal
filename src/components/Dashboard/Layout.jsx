@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { BellIcon, SearchIcon, MenuIcon, } from "lucide-react";
+import { BellIcon, SearchIcon, MenuIcon } from "lucide-react";
 import Dashboard from "./Dashboard";
 import ResumeBuilder from "./ResumeBuilder";
 import Tracking from "./Tracking";
@@ -14,7 +14,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import JobPostingManager from "./JobPostingManager";
 
-
 const routeItem = [
   { name: "Home", icon: "🏠", path: "/" },
   { name: "Course", icon: "📚", path: "/courses" },
@@ -22,40 +21,32 @@ const routeItem = [
 ];
 
 export default function Layout({ data }) {
-
   console.log(data);
-  
 
   const sidebarItems = [
     { name: "Dashboard", icon: "📊", component: Dashboard },
 
-    ...(data.role === 'student'
+    ...(data.role === "student"
       ? [
-        { name: "Resume Builder", icon: "📝", component: ResumeBuilder },
-        { name: "My Application", icon: "📝", component: ResumeBuilder },
-        { name: "My Courses", icon: "📝", component: ResumeBuilder },
-        { name: "Message", icon: "💬", component: Message },
-        { name: "My Profile", icon: "👤", component: MyProfile },
-        { name: "Setting", icon: "⚙️", component: Setting },
-      ]
+          { name: "Resume Builder", icon: "📝", component: ResumeBuilder },
+          { name: "My Application", icon: "📝", component: ResumeBuilder },
+          { name: "My Courses", icon: "📝", component: ResumeBuilder },
+          { name: "Message", icon: "💬", component: Message },
+          { name: "My Profile", icon: "👤", component: MyProfile },
+          { name: "Setting", icon: "⚙️", component: Setting },
+        ]
       : []),
-    ...(data.role === 'company'
+    ...(data.role === "company"
       ? [
-        { name: "Post Job/Inter", icon: "🔍", component: Tracking },
-        { name: "Post Job New", icon: "🔍", component: JobPostingManager },
-        { name: "Interview", icon: "🎙️", component: Interview },
-        { name: "Message", icon: "💬", component: Message },
-        { name: "My Profile", icon: "👤", component: MyProfile },
-        { name: "Setting", icon: "⚙️", component: Setting },
-      ]
+          { name: "Post Job/Inter", icon: "🔍", component: Tracking },
+          { name: "Post Job New", icon: "🔍", component: JobPostingManager },
+          { name: "Interview", icon: "🎙️", component: Interview },
+          { name: "Message", icon: "💬", component: Message },
+          { name: "My Profile", icon: "👤", component: MyProfile },
+          { name: "Setting", icon: "⚙️", component: Setting },
+        ]
       : []),
-
   ];
-
-
-
-
-
 
   const [activeItem, setActiveItem] = useState("Dashboard");
   const [activeHomeItem, setActiveHomeItem] = useState("/");
@@ -115,11 +106,10 @@ export default function Layout({ data }) {
     setActiveItem("My Profile");
   };
 
-
   const handleLogout = () => {
-    localStorage.removeItem('token')
+    localStorage.removeItem("token");
     router.push("/");
-  }
+  };
 
   const handleNotificationClick = () => {
     setIsNotificationOpen(!isNotificationOpen);
@@ -170,10 +160,11 @@ export default function Layout({ data }) {
                   <motion.div // Use div instead of <a> to avoid <a> nesting
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`block py-2 px-4 my-2 rounded transition-colors duration-200 ${isClient && window.location.pathname === item.path
-                      ? "bg-indigo-700"
-                      : "hover:bg-indigo-800"
-                      }`}
+                    className={`block py-2 px-4 my-2 rounded transition-colors duration-200 ${
+                      isClient && window.location.pathname === item.path
+                        ? "bg-indigo-700"
+                        : "hover:bg-indigo-800"
+                    }`}
                     onClick={() => setActiveHomeItem(item.path)}
                   >
                     <span className="mr-2">{item.icon}</span>
@@ -187,10 +178,11 @@ export default function Layout({ data }) {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#"
-                  className={`block py-2 px-4 my-2 rounded transition-colors duration-200 ${activeItem === item.name
-                    ? "bg-indigo-700"
-                    : "hover:bg-indigo-800"
-                    }`}
+                  className={`block py-2 px-4 my-2 rounded transition-colors duration-200 ${
+                    activeItem === item.name
+                      ? "bg-indigo-700"
+                      : "hover:bg-indigo-800"
+                  }`}
                   onClick={() => setActiveItem(item.name)}
                 >
                   <span className="mr-2">{item.icon}</span>
@@ -317,15 +309,8 @@ export default function Layout({ data }) {
           </div>
         </header>
 
-
-
-
-
-
-
-
         {/* Content */}
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
+        <main className="flex-1  overflow-x-hidden overflow-y-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeItem}
