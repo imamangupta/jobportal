@@ -34,9 +34,34 @@ const ApplicantsTable = ({ jobId, onChatClick }) => {
       setIsLoading(false)
     }
   }
+  const fetchAllAppData = async () => {
+
+    try {
+      const response = await fetch(`${BaseApiUrl}/app/getAppByJob`, {
+        method: 'GET',
+        headers: {
+          'jobid': jobId
+        }
+      });
+      const json = await response.json();
+
+      if (json) {
+        console.log(json);
+       
+      }
+      
+    } catch (error) {
+      console.error("Error fetching applicants:", error)
+      
+    }
+  }
+
+
+
 
   useEffect(() => {
     fetchApplicants()
+    fetchAllAppData()
   }, [jobId])
 
   return (
