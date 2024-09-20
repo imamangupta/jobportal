@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useCallback, Suspense, useMemo } from "react"
+import React, { useState, useEffect, useCallback, Suspense } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -28,21 +28,55 @@ const JobCard = React.lazy(() => import("./JobCard"))
 const filterCategories = [
   {
     name: "Job Type",
-    options: ["Full-Time", "Part-Time", "Contract", "Internship"],
+    options: ["All", "Full-Time", "Part-Time", "Contract", "Internship"],
   },
-  { name: "Work Type", options: ["online", "offline", "hybrid"] },
-  { name: "Experience", options: ["entry-level", "mid-level", "senior-level"] },
+  { name: "Work Type", options: ["Remote", "Onsite", "Hybrid"] },
+  { name: "Experience", options: ["Entry Level", "Mid Level", "Senior Level"] },
   {
     name: "Job Function",
     options: [
-      "Website development",
-      "Mobile App Development",
-      "UI/UX Design",
-      "Data Analysis",
-      "Project Management",
-      "Digital Marketing",
+      "Design",
+      "Development",
+      "Product Management",
+      "Data Science",
+      "DevOps",
+      "Marketing",
+      "Human Resources",
+      "Sales",
     ],
   },
+]
+
+const indianStates = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+  "Delhi",
 ]
 
 const JobMain = () => {
@@ -50,49 +84,70 @@ const JobMain = () => {
   const [filters, setFilters] = useState({})
   const [searchTerm, setSearchTerm] = useState("")
   const [expandedFilters, setExpandedFilters] = useState({})
+  const [selectedState, setSelectedState] = useState("")
   const [location, setLocation] = useState("")
-  const [salaryRange, setSalaryRange] = useState([0, 300000])
+  const [salaryRange, setSalaryRange] = useState([0, 3000000])
   const [view, setView] = useState("list")
 
   const router = useRouter()
 
-  const filteredJobs = useMemo(() => {
-    return jobs.filter((job) => {
-      const matchesSearch =
-        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.tags.toLowerCase().includes(searchTerm.toLowerCase())
-
-      const matchesFilters = Object.entries(filters).every(
-        ([category, selectedOptions]) => {
-          if (!selectedOptions || selectedOptions.length === 0) return true
-
-          switch (category) {
-            case "Job Type":
-              return selectedOptions.includes(job.type)
-            case "Work Type":
-              return selectedOptions.includes(job.workType)
-            case "Experience":
-              return selectedOptions.includes(job.experience)
-            case "Job Function":
-              return selectedOptions.includes(job.jobFunction)
-            default:
-              return true
-          }
+  const fetchJobPost = useCallback(async () => {
+    try {
+      const response = await fetch(`${BaseApiUrl}/job`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
         }
-      )
+      })
+      const json = await response.json()
 
-      const matchesLocation =
-        !location ||
-        job.location.toLowerCase().includes(location.toLowerCase())
+      if (json && json.job) {
+        setJobs(json.job)
+      }
+    } catch (error) {
+      console.error('Error fetching jobs:', error)
+    }
+  }, [])
 
-      const jobSalary = parseInt(job.salary.replace(/[^0-9]/g, ""))
-      const matchesSalary =
-        jobSalary >= salaryRange[0] && jobSalary <= salaryRange[1]
+  useEffect(() => {
+    fetchJobPost()
+  }, [fetchJobPost])
 
-      return matchesSearch && matchesFilters && matchesLocation && matchesSalary
-    })
-  }, [jobs, searchTerm, filters, location, salaryRange])
+  const filteredJobs = jobs.filter((job) => {
+    const matchesSearch =
+      job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.tags.toLowerCase().includes(searchTerm.toLowerCase())
+
+    const matchesFilters = Object.entries(filters).every(
+      ([category, selectedOptions]) => {
+        if (!selectedOptions || selectedOptions.length === 0) return true
+
+        switch (category) {
+          case "Job Type":
+            return selectedOptions.includes(job.jobType) || selectedOptions.includes("All")
+          case "Work Type":
+            return selectedOptions.includes(job.workType)
+          case "Experience":
+            return selectedOptions.includes(job.experience)
+          case "Job Function":
+            return selectedOptions.includes(job.jobFunction)
+          default:
+            return true
+        }
+      }
+    )
+
+    const matchesLocation =
+      !location ||
+      job.location.toLowerCase().includes(location.toLowerCase())
+
+    const jobSalary = parseInt(job.salary.replace(/[^0-9]/g, ""))
+    const matchesSalary =
+      jobSalary >= salaryRange[0] && jobSalary <= salaryRange[1]
+
+    return matchesSearch && matchesFilters && matchesLocation && matchesSalary
+  })
 
   const handleFilterChange = (category, value) => {
     setFilters((prevFilters) => {
@@ -121,7 +176,8 @@ const JobMain = () => {
     setFilters({})
     setSearchTerm("")
     setLocation("")
-    setSalaryRange([0, 300000])
+    setSelectedState("")
+    setSalaryRange([0, 3000000])
   }
 
   const formatCurrency = (value) => {
@@ -131,28 +187,6 @@ const JobMain = () => {
       maximumFractionDigits: 0,
     }).format(value)
   }
-
-  const fetchJobPost = async () => {
-    try {
-      const response = await fetch(`${BaseApiUrl}/job`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const json = await response.json()
-
-      if (json && json.job) {
-        setJobs(json.job)
-      }
-    } catch (error) {
-      console.error('Error fetching jobs:', error)
-    }
-  }
-
-  useEffect(() => {
-    fetchJobPost()
-  }, [])
 
   return (
     <div className="container mx-auto px-4 py-8 bg-[#f8f3ff]">
@@ -177,10 +211,22 @@ const JobMain = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         </div>
         <div className="flex flex-wrap items-center gap-4">
+          <Select value={selectedState} onValueChange={setSelectedState}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select state" />
+            </SelectTrigger>
+            <SelectContent>
+              {indianStates.map((state) => (
+                <SelectItem key={state} value={state}>
+                  {state}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <div className="relative flex-grow max-w-xs">
             <Input
               type="text"
-              placeholder="Location"
+              placeholder="Bangalore, Koramangala"
               className="pl-10 pr-4 py-2"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
@@ -256,8 +302,8 @@ const JobMain = () => {
             <h3 className="font-semibold mb-2 text-gray-700">Salary Range</h3>
             <Slider
               min={0}
-              max={300000}
-              step={1000}
+              max={3000000}
+              step={10000}
               value={salaryRange}
               onValueChange={setSalaryRange}
             />
