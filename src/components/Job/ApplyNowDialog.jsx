@@ -15,22 +15,26 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Toast } from "@radix-ui/react-toast";
 
-export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company }) {
+export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company,job }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [coverLetter, setCoverLetter] = useState("");
-  const [resume, setResume] = useState(null);
+  const [resume, setResume] = useState('');
   const [showToast, setShowToast] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Here you would typically send the form data to your backend
-    console.log({ name, email, phone, coverLetter, resume });
-    setTimeout(() => {
-      toast.success('Application Submitted Successfully')
-      onClose();
-    }, 1000);
+
+    console.log({ name, email, phone, coverLetter, resume,job });
+
+
+
+    // setTimeout(() => {
+    //   toast.success('Application Submitted Successfully')
+    //   onClose();
+    // }, 1000);
   };
 
   return (
@@ -83,11 +87,11 @@ export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company }) {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="resume">Resume</Label>
+              <Label htmlFor="resume">CodePathshala Resume Link</Label>
               <Input
                 id="resume"
-                type="file"
-                onChange={(e) => setResume(e.target.files[0])}
+                type="text"
+                onChange={(e) => setResume(e.target.value)}
                 accept=".pdf,.doc,.docx"
                 required
               />

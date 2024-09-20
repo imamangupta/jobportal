@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { PlusIcon, MinusIcon } from 'lucide-react'
+import Link from "next/link"
 
 const ResumeBuilder = () => {
   const [resume, setResume] = useState({
@@ -103,7 +104,7 @@ const ResumeBuilder = () => {
     e.preventDefault()
     console.log('Resume data:', resume)
     // Here you would typically send the resume data to your backend or generate a PDF
-  }   
+  }
 
   return (
     <motion.div
@@ -111,6 +112,11 @@ const ResumeBuilder = () => {
       animate={{ opacity: 1, y: 0 }}
       className="bg-white rounded-lg shadow p-6 max-w-4xl mx-auto"
     >
+      <div>
+        <Link href={'/resume/jalds'}><Button type="button" >
+            View Resume
+          </Button></Link>
+      </div>
       <h2 className="text-2xl font-semibold mb-6">Resume Builder</h2>
       <form onSubmit={handleSubmit}>
         <section className="mb-8">

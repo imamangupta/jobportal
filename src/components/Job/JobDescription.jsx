@@ -134,6 +134,7 @@ export default function JobDescription({ job }) {
         onClose={() => setIsApplyDialogOpen(false)}
         jobTitle={job.title}
         company={job.company}
+        job={job}
       />
     </Card>
   );
