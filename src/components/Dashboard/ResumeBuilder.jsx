@@ -177,7 +177,7 @@ const ResumeBuilder = ({data}) => {
       className="bg-white rounded-lg shadow p-6 max-w-4xl mx-auto"
     >
       <div>
-        <Link href={`/resume/${data.userId}`}><Button type="button" >
+        <Link target='_blank' href={`/resume/${data.userId}`}><Button type="button" >
             View Resume
           </Button></Link>
       </div>
