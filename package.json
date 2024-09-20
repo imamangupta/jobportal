@@ -53,6 +53,8 @@
     "nextjs-toploader": "^3.6.15",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
+    "react-chat-engine-advanced": "^0.1.28",
+    "react-chat-engine-pretty": "^0.1.8",
     "react-countup": "^6.5.3",
     "react-dom": "^18",
     "react-icon": "^1.0.0",
