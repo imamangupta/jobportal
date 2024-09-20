@@ -12,21 +12,13 @@ const Hero = () => {
         {/* brand info */}
         <div className="flex flex-col justify-center py-14 md:pr-16 xl:pr-40 md:py-0">
           <div className="text-center md:text-left space-y-6">
-            <motion.p
-              variants={SlideRight(0.4)}
-              initial="hidden"
-              animate="visible"
-              className="text-orange-600 uppercase font-semibold"
-            >
-              100% Satisfaction Guarantee
-            </motion.p>
             <motion.h1
               variants={SlideRight(0.6)}
               initial="hidden"
               animate="visible"
               className="text-5xl font-semibold lg:text-5xl !leading-tight"
             >
-              Bridging the Gap between <span className="text-[#20b9f1]">Learning and Earning!</span> 
+              Bridging the Gap between <span className="text-purple-600">Learning and Earning!</span> 
             </motion.h1>
             <motion.p
               variants={SlideRight(0.8)}

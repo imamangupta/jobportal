@@ -70,7 +70,7 @@ const linkPaths = {
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-sm">
           <div className="col-span ">
-            <h3 className="text-2xl font-bold mb-4">Etech.</h3>
+            <h3 className="text-2xl font-bold mb-4">CodePathshala</h3>
             <p className="mb-4  w-2/3">
               Explore a transformative approach to skill development on our
               online learning platform.
@@ -151,13 +151,13 @@ const linkPaths = {
 
           <div>
             <h4 className="font-semibold mb-4">Contact Us</h4>
-            <p>+1 (555) 123-4567</p>
-            <p>abc@gmail.com</p>
+            <p>+91 9922041218</p>
+            <p>codepathshala@gmail.com</p>
           </div>
         </div>
 
         <div className="mt-12 text-center text-sm">
-          <p>&copy; 2024 CodePathshala. All rights reserved.</p>
+          <p>&copy; 2024 Cipher Squad. All rights reserved.</p>
         </div>
       </div>
     </footer>
