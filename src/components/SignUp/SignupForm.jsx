@@ -13,6 +13,8 @@ import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { BaseApiUrl } from '@/utils/constanst'
 
+import { toast } from "sonner";
+
 function BackgroundScene() {
   const sphereRef = useRef()
   const boxRef = useRef()
@@ -54,7 +56,9 @@ export default function SignupForm() {
     email: '',
     password: '',
     userType: '',
-    userName:''
+    userName: '',
+    firstname: '',
+    lastname: '',
   })
   const [isFormValid, setIsFormValid] = useState(false)
   const router = useRouter()
@@ -76,39 +80,55 @@ export default function SignupForm() {
       email,
       password,
       userType,
-      userName
+      userName,
+      lastname,
+      firstname
     } = formData
 
     const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     const isPasswordValid = password.length >= 8
-   
 
-    setIsFormValid(isEmailValid && isPasswordValid && userType && userName)
+
+    setIsFormValid(isEmailValid && isPasswordValid && userType && userName && lastname && firstname)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (isFormValid) {
       console.log(formData);
-      
-    let {email , password, userName, userType} = formData
+
+      let { email, password, userName, userType, firstname, lastname } = formData
       const response = await fetch(`${BaseApiUrl}/user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: email, password: password, role:userType,userName:userName })
+        body: JSON.stringify({ email: email, password: password, role: userType, userName: userName })
       });
       const json = await response.json();
 
       if (json) {
         // console.log(json.data.token);
-        
+        const response2 = await fetch(`https://jobportal-backend-wine.vercel.app/signup`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username: userName, secret: 'secret', email: email, first_name: firstname, last_name: lastname, })
+        });
+        const json2 = await response2.json();
+
         localStorage.setItem('token', json.data.token)
+        toast.success("Signup SuccessFull", json2);
         router.push("/dashboard")
+      } else {
+        toast.error("some error");
+
       }
+
     }
   }
+
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50 overflow-hidden p-4">
@@ -118,7 +138,7 @@ export default function SignupForm() {
           <OrbitControls enableZoom={false} enablePan={false} />
         </Canvas>
       </div>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -189,7 +209,33 @@ export default function SignupForm() {
               </div>
             </RadioGroup>
           </div>
-       
+          <div>
+            <Label htmlFor="firstname" className="text-sm">First Name</Label>
+            <Input
+              id="firstname"
+              name="firstname"
+              placeholder="Enter your First Name"
+              type="text"
+              value={formData.firstname}
+              onChange={handleInputChange}
+              required
+              className="mt-1"
+            />
+          </div>
+          <div>
+            <Label htmlFor="lastname" className="text-sm">Last Name</Label>
+            <Input
+              id="lastname"
+              name="lastname"
+              placeholder="Enter your Last Name"
+              type="text"
+              value={formData.lastname}
+              onChange={handleInputChange}
+              required
+              className="mt-1"
+            />
+          </div>
+
           <Button
             className="w-full"
             type="submit"
@@ -198,16 +244,6 @@ export default function SignupForm() {
             SIGN UP
           </Button>
         </form>
-        {/* <div className="mt-3 text-center">
-          <p className="text-gray-600 text-xs">or</p>
-          <Button
-            variant="outline"
-            className="w-full mt-2 text-sm"
-            onClick={() => alert('Continuing with Google...')}
-          >
-            <FaGoogle className="mr-2 h-3 w-3" /> Continue with Google
-          </Button>
-        </div> */}
         <p className="mt-3 text-xs text-center text-gray-500">
           By clicking Sign Up you agree to our{" "}
           <a href="/terms" className="text-blue-500 hover:underline">

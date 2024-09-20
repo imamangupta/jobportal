@@ -6,6 +6,7 @@ import { OrbitControls, Sphere, Box, Text, Float } from '@react-three/drei'
 import { FaGoogle, FaApple } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 import { BaseApiUrl } from '@/utils/constanst'
+import { toast } from "sonner";
 
 function BackgroundScene() {
   const sphereRef = useRef()
@@ -56,29 +57,31 @@ export default function LoginForm() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (isFormValid) {
-
-      console.log(email, password);
 
 
-      const response = await fetch(`${BaseApiUrl}/user/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: email, password: password })
-      });
-      const json = await response.json();
+    console.log(email, password);
 
-      if (json) {
-        console.log(json);
-        
-        localStorage.setItem('token', json.data.token)
-        router.push("/dashboard")
-      }
+    const response = await fetch(`${BaseApiUrl}/user/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email: email, password: password })
+    });
+    const json = await response.json();
 
+    if (json.data) {
+      console.log(json);
 
+      toast.success("Login SuccessFull");
+      localStorage.setItem('token', json.data.token)
+      router.push("/dashboard")
+    } else {
+      toast.error("Invalid Credentials");
     }
+
+
+
   }
 
   return (
@@ -97,7 +100,7 @@ export default function LoginForm() {
             SIGN UP
           </a>
         </p>
-        <form onSubmit={handleSubmit} onChange={validateForm}>
+        <form onSubmit={handleSubmit} >
           <div className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
@@ -142,28 +145,10 @@ export default function LoginForm() {
           <button
             className="w-full mt-6 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
             type="submit"
-            disabled={!isFormValid}
           >
             LOG IN
           </button>
         </form>
-        {/* <div className="mt-6 text-center">
-          <p className="text-gray-600">or</p>
-          <div className="mt-4 space-y-3">
-            <button
-              className="w-full px-4 py-2 border border-gray-300 text-gray-700 font-semibold rounded-lg shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 flex items-center justify-center"
-              onClick={() => alert('Logging in with Google...')}
-            >
-              <FaGoogle className="mr-2 h-4 w-4" /> Continue with Google
-            </button>
-            <button
-              className="w-full px-4 py-2 bg-black text-white font-semibold rounded-lg shadow-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75 flex items-center justify-center"
-              onClick={() => alert('Logging in with Apple...')}
-            >
-              <FaApple className="mr-2 h-4 w-4" /> Continue with Apple
-            </button>
-          </div>
-        </div> */}
       </div>
     </div>
   )

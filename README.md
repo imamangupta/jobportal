@@ -1,13 +1,13 @@
 
 ## As a Student
 
-**Email:** 
+**Email:** amanwebdevv@gmail.com
 
-**password:** 
+**password:** 11223344
 
 ## As a Hr/Company
 
-**Email:** 
+**Email:** hr@codepathshal.com
 
-**password:** 
+**password:** 11223344
 
