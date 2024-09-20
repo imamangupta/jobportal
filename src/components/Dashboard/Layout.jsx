@@ -13,6 +13,7 @@ import Setting from "./Setting";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import JobPostingManager from "./JobPostingManager";
+import MyApplication from "./MyApplication";
 
 
 const routeItem = [
@@ -32,7 +33,7 @@ export default function Layout({ data }) {
     ...(data.role === 'student'
       ? [
         { name: "Resume Builder", icon: "📝", component: ResumeBuilder },
-        { name: "My Application", icon: "📝", component: ResumeBuilder },
+        { name: "My Application", icon: "📝", component: MyApplication },
         { name: "Message", icon: "💬", component: Message },
         { name: "Interview", icon: "🎙️", component: Interview },
         { name: "My Profile", icon: "👤", component: MyProfile },
