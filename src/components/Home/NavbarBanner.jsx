@@ -10,7 +10,7 @@ const NavbarBanner = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.7 }}
-        className="bg-[#ffcf3a] text-sm text-center font-semibold p-1 hidden lg:block relative"
+        className="bg-[#76fcfc] text-sm text-center font-semibold p-1 hidden lg:block relative"
       >
         Are you a university or school student for an online tutoring
         partnership?

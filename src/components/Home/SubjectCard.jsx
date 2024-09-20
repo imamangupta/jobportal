@@ -1,62 +1,62 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { FaComputer, FaBook } from "react-icons/fa6";
-
+import { FaComputer, FaBook, FaBots } from "react-icons/fa6";
+import { FaRobot } from "react-icons/fa";
 const subjectList = [
   {
     id: 1,
-    name: "Engineering",
+    name: "C++ & DSA ",
     icon: <FaComputer />,
     color: "#0063ff",
     delay: 0.2,
   },
   {
     id: 2,
-    name: "English",
+    name: "Java Language ",
     icon: <FaBook />,
     color: "#00c986",
     delay: 0.3,
   },
   {
     id: 3,
-    name: "Programming",
+    name: "FrontEnd",
     icon: <FaComputer />,
     color: "#922aee",
     delay: 0.4,
   },
   {
     id: 4,
-    name: "Science",
+    name: "BackEnd",
     icon: <FaBook />,
     color: "#ea7516",
     delay: 0.5,
   },
   {
     id: 5,
-    name: "History",
+    name: "Python",
     icon: <FaBook />,
     color: "#075267",
     delay: 0.6,
   },
   {
     id: 6,
-    name: "Psychology",
+    name: "React Js",
     icon: <FaBook />,
     color: "#986d1d",
     delay: 0.7,
   },
   {
     id: 7,
-    name: "Web design",
+    name: "MERN Stack",
     icon: <FaBook />,
     color: "#b93838",
     delay: 0.8,
   },
   {
     id: 8,
-    name: "See all",
-    icon: <FaBook />,
+    name: "Generative AI",
+    icon: <FaBots/>,
     color: "#464646",
     delay: 0.9,
   },

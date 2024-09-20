@@ -14,12 +14,10 @@ const FAQ = () => {
       {/* Left Section */}
       <div className="w-full lg:w-[50%] flex flex-col items-start gap-6 lg:gap-[2rem]">
         <h1 className="font-[700] text-[2rem] lg:text-[4rem] w-full lg:w-[90%] leading-tight">
-          Any questions? We got you.
+        Any questions? we Got you:-
         </h1>
         <p className="font-[500] text-[1rem] lg:text-[1.2rem] w-full lg:w-[90%]">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis,
-          consequuntur. Similique adipisci ullam hic delectus. Quas commodi
-          ullam aliquam eum. Lorem ipsum dolor sit amet.
+        Got questions? We've got answers! Our dedicated support team is here to help with any inquiries you have about courses, enrollment, or anything else. Reach out anytime, and we'll make sure you get the information you need 
         </p>
         <button className="w-[max-content] h-[max-content] text-purple-600 font-[500] flex items-center justify-center gap-2">
           More FAQs

@@ -3,7 +3,7 @@ import React from "react";
 import { FaPlay } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { SlideRight } from "../../utils/animation";
-import Image from 'next/image'
+
 
 const Hero = () => {
   return (
@@ -24,17 +24,16 @@ const Hero = () => {
               variants={SlideRight(0.6)}
               initial="hidden"
               animate="visible"
-              className="text-5xl font-semibold lg:text-6xl !leading-tight"
+              className="text-5xl font-semibold lg:text-5xl !leading-tight"
             >
-              Find Your Perfect <span className="text-[#ffcf3a]">Tutor</span>
+              Bridging the Gap between <span className="text-[#20b9f1]">Learning and Earning!</span> 
             </motion.h1>
             <motion.p
               variants={SlideRight(0.8)}
               initial="hidden"
               animate="visible"
             >
-              We help you find perfect tutor for 1-on-1 lessons. It is
-              completely free and private
+             Don’t just learn—turn your new skills into a rewarding career. Our platform bridges the gap between education and employment, making it easy to find both learning resources and job opportunities in one place. Success is just a click away! 
             </motion.p>
             {/* button section */}
             <motion.div
@@ -61,7 +60,7 @@ const Hero = () => {
             transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
             src="/assets/hero.png"
             alt=""
-            className="w-[350px] md:w-[550px] xl:w-[700px]"
+            className="w-[350px] h-auto md:w-[550px] xl:w-[700px]  "
           />
         </div>
       </div>
