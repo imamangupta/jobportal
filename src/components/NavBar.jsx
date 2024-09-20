@@ -156,9 +156,9 @@ export default function NavBar() {
       label: "Job",
       href: "/job",
       subItems: [
-        { label: "Job Listings", href: "/job/listings" },
-        { label: "Career Advice", href: "/job/career-advice" },
-        { label: "Resume Builder", href: "/job/resume-builder" },
+        { label: "Jobs", href: "/job" },
+        { label: "Intership", href: "/job?jobtype=intership" },
+        { label: "Contract", href: "/job?jobtype=contract" },
       ],
     },
     ...(isAuthenticated

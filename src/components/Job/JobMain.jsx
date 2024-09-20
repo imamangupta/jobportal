@@ -23,6 +23,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useRouter } from "next/navigation"
 import { BaseApiUrl } from "@/utils/constanst"
 
+
 const JobCard = React.lazy(() => import("./JobCard"))
 
 const filterCategories = [
@@ -46,6 +47,8 @@ const filterCategories = [
 ]
 
 const JobMain = () => {
+
+  
   const [jobs, setJobs] = useState([])
   const [filters, setFilters] = useState({})
   const [searchTerm, setSearchTerm] = useState("")
@@ -53,8 +56,10 @@ const JobMain = () => {
   const [location, setLocation] = useState("")
   const [salaryRange, setSalaryRange] = useState([0, 300000])
   const [view, setView] = useState("list")
-
+  
   const router = useRouter()
+  // const { jobtype } = router.query; 
+  // console.log('jobtype',jobtype);
 
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
