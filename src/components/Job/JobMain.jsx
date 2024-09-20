@@ -1,213 +1,158 @@
-"use client";
-import React, { useState, useEffect, useCallback, Suspense, useMemo } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+'use client'
+
+import React, { useState, useEffect, useCallback, Suspense, useMemo } from "react"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
+} from "@/components/ui/select"
+import { Slider } from "@/components/ui/slider"
 import {
   Search,
   MapPin,
   ChevronDown,
   LayoutGrid,
   LayoutList,
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { BaseApiUrl } from "@/utils/constanst";
+} from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { useRouter } from "next/navigation"
+import { BaseApiUrl } from "@/utils/constanst"
 
-// Lazily import JobCard component to optimize loading
-const JobCard = React.lazy(() => import("./JobCard"));
+const JobCard = React.lazy(() => import("./JobCard"))
 
 const filterCategories = [
   {
     name: "Job Type",
-    options: ["All", "Full-Time", "Part-Time", "Contract", "Internship"],
+    options: ["Full-Time", "Part-Time", "Contract", "Internship"],
   },
-  { name: "Work Type", options: ["Remote", "Onsite", "Hybrid"] },
-  { name: "Experience", options: ["Entry Level", "Mid Level", "Senior Level"] },
+  { name: "Work Type", options: ["online", "offline", "hybrid"] },
+  { name: "Experience", options: ["entry-level", "mid-level", "senior-level"] },
   {
     name: "Job Function",
     options: [
-      "Design",
-      "Development",
-      "Product Management",
-      "Data Science",
-      "DevOps",
-      "Marketing",
-      "Human Resources",
-      "Sales",
+      "Website development",
+      "Mobile App Development",
+      "UI/UX Design",
+      "Data Analysis",
+      "Project Management",
+      "Digital Marketing",
     ],
   },
-];
-
-const indianStates = [
-  "Andhra Pradesh",
-  "Arunachal Pradesh",
-  "Assam",
-  "Bihar",
-  "Chhattisgarh",
-  "Goa",
-  "Gujarat",
-  "Haryana",
-  "Himachal Pradesh",
-  "Jharkhand",
-  "Karnataka",
-  "Kerala",
-  "Madhya Pradesh",
-  "Maharashtra",
-  "Manipur",
-  "Meghalaya",
-  "Mizoram",
-  "Nagaland",
-  "Odisha",
-  "Punjab",
-  "Rajasthan",
-  "Sikkim",
-  "Tamil Nadu",
-  "Telangana",
-  "Tripura",
-  "Uttar Pradesh",
-  "Uttarakhand",
-  "West Bengal",
-  "Delhi",
-];
+]
 
 const JobMain = () => {
+  const [jobs, setJobs] = useState([])
+  const [filters, setFilters] = useState({})
+  const [searchTerm, setSearchTerm] = useState("")
+  const [expandedFilters, setExpandedFilters] = useState({})
+  const [location, setLocation] = useState("")
+  const [salaryRange, setSalaryRange] = useState([0, 300000])
+  const [view, setView] = useState("list")
 
-  const [postJob, setPostJob] = useState([]);
-  const [jobs, setJobs] = useState(postJob);
-  const [filters, setFilters] = useState({});
-  const [searchTerm, setSearchTerm] = useState("");
-  const [expandedFilters, setExpandedFilters] = useState({});
-  const [selectedState, setSelectedState] = useState("");
-  const [location, setLocation] = useState("");
-  const [salaryRange, setSalaryRange] = useState([0, 3000000]);
-  const [view, setView] = useState("list");
+  const router = useRouter()
 
-  const router = useRouter();
-
-  // Memoize filtered jobs to avoid recalculating when inputs remain unchanged
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
       const matchesSearch =
         job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.tags.some((tag) =>
-          tag.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        job.tags.toLowerCase().includes(searchTerm.toLowerCase())
 
       const matchesFilters = Object.entries(filters).every(
         ([category, selectedOptions]) => {
-          if (!selectedOptions || selectedOptions.length === 0) return true;
+          if (!selectedOptions || selectedOptions.length === 0) return true
 
           switch (category) {
             case "Job Type":
-              return (
-                selectedOptions.includes(job.jobType) ||
-                selectedOptions.includes("All")
-              );
+              return selectedOptions.includes(job.type)
             case "Work Type":
-              return selectedOptions.includes(job.workType);
+              return selectedOptions.includes(job.workType)
             case "Experience":
-              return selectedOptions.includes(job.experience);
+              return selectedOptions.includes(job.experience)
             case "Job Function":
-              return selectedOptions.includes(job.jobFunction);
+              return selectedOptions.includes(job.jobFunction)
             default:
-              return true;
+              return true
           }
         }
-      );
+      )
 
       const matchesLocation =
         !location ||
-        job.location.toLowerCase().includes(location.toLowerCase());
+        job.location.toLowerCase().includes(location.toLowerCase())
 
-      const jobSalary = parseInt(job.salary.replace(/[^0-9]/g, ""));
+      const jobSalary = parseInt(job.salary.replace(/[^0-9]/g, ""))
       const matchesSalary =
-        jobSalary >= salaryRange[0] && jobSalary <= salaryRange[1];
+        jobSalary >= salaryRange[0] && jobSalary <= salaryRange[1]
 
-      return matchesSearch && matchesFilters && matchesLocation && matchesSalary;
-    });
-  }, [searchTerm, filters, location, salaryRange]);
-
-  const applyFilters = useCallback(() => {
-    setJobs(filteredJobs);
-  }, [filteredJobs]);
-
-  useEffect(() => {
-    applyFilters();
-  }, [applyFilters]);
+      return matchesSearch && matchesFilters && matchesLocation && matchesSalary
+    })
+  }, [jobs, searchTerm, filters, location, salaryRange])
 
   const handleFilterChange = (category, value) => {
     setFilters((prevFilters) => {
-      const updatedFilters = { ...prevFilters };
+      const updatedFilters = { ...prevFilters }
       if (!updatedFilters[category]) {
-        updatedFilters[category] = [];
+        updatedFilters[category] = []
       }
-      const index = updatedFilters[category].indexOf(value);
+      const index = updatedFilters[category].indexOf(value)
       if (index > -1) {
-        updatedFilters[category].splice(index, 1);
+        updatedFilters[category].splice(index, 1)
       } else {
-        updatedFilters[category].push(value);
+        updatedFilters[category].push(value)
       }
       if (updatedFilters[category].length === 0) {
-        delete updatedFilters[category];
+        delete updatedFilters[category]
       }
-      return updatedFilters;
-    });
-  };
+      return updatedFilters
+    })
+  }
 
   const toggleFilterExpansion = (category) => {
-    setExpandedFilters((prev) => ({ ...prev, [category]: !prev[category] }));
-  };
+    setExpandedFilters((prev) => ({ ...prev, [category]: !prev[category] }))
+  }
 
   const clearFilters = () => {
-    setFilters({});
-    setSearchTerm("");
-    setLocation("");
-    setSelectedState("");
-    setSalaryRange([0, 3000000]);
-  };
+    setFilters({})
+    setSearchTerm("")
+    setLocation("")
+    setSalaryRange([0, 300000])
+  }
 
   const formatCurrency = (value) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
       maximumFractionDigits: 0,
-    }).format(value);
-  };
+    }).format(value)
+  }
 
-  // const handleRoute = useCallback(() => {
-  //   router.push("/job/job-profile");
-  // }, [router]);
+  const fetchJobPost = async () => {
+    try {
+      const response = await fetch(`${BaseApiUrl}/job`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      const json = await response.json()
 
-  const fetchJobPost = async ()=>{
-    const response = await fetch(`${BaseApiUrl}/job`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
+      if (json && json.job) {
+        setJobs(json.job)
       }
-    });
-    const json = await response.json();
-
-    if (json) {
-      console.log(json.job);
-      setPostJob(json.job)
-      setJobs(json.job)
+    } catch (error) {
+      console.error('Error fetching jobs:', error)
     }
   }
 
   useEffect(() => {
     fetchJobPost()
   }, [])
-  
 
   return (
     <div className="container mx-auto px-4 py-8 bg-[#f8f3ff]">
@@ -232,22 +177,10 @@ const JobMain = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         </div>
         <div className="flex flex-wrap items-center gap-4">
-          <Select value={selectedState} onValueChange={setSelectedState}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select state" />
-            </SelectTrigger>
-            <SelectContent>
-              {indianStates.map((state) => (
-                <SelectItem key={state} value={state}>
-                  {state}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
           <div className="relative flex-grow max-w-xs">
             <Input
               type="text"
-              placeholder="Bangalore, Koramangala"
+              placeholder="Location"
               className="pl-10 pr-4 py-2"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
@@ -256,7 +189,6 @@ const JobMain = () => {
           </div>
           <Button
             className="bg-green-500 hover:bg-green-600 text-white"
-            onClick={applyFilters}
           >
             Search
           </Button>
@@ -324,8 +256,8 @@ const JobMain = () => {
             <h3 className="font-semibold mb-2 text-gray-700">Salary Range</h3>
             <Slider
               min={0}
-              max={3000000}
-              step={10000}
+              max={300000}
+              step={1000}
               value={salaryRange}
               onValueChange={setSalaryRange}
             />
@@ -338,22 +270,24 @@ const JobMain = () => {
 
         {/* Job listings */}
         <div className="w-full md:w-3/4">
-          <div className="flex justify-end items-center gap-4 mb-4">
-          <h2 className="text-xl font-semibold text-gray-800">
-              Showing results: {jobs.length} Jobs
+          <div className="flex justify-between items-center gap-4 mb-4">
+            <h2 className="text-xl font-semibold text-gray-800">
+              Showing results: {filteredJobs.length} Jobs
             </h2>
-            <Button
-              variant={view === "list" ? "default" : "ghost"}
-              onClick={() => setView("list")}
-            >
-              <LayoutList />
-            </Button>
-            <Button
-              variant={view === "grid" ? "default" : "ghost"}
-              onClick={() => setView("grid")}
-            >
-              <LayoutGrid />
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                variant={view === "list" ? "default" : "ghost"}
+                onClick={() => setView("list")}
+              >
+                <LayoutList />
+              </Button>
+              <Button
+                variant={view === "grid" ? "default" : "ghost"}
+                onClick={() => setView("grid")}
+              >
+                <LayoutGrid />
+              </Button>
+            </div>
           </div>
           <Suspense fallback={<div>Loading jobs...</div>}>
             <div
@@ -361,15 +295,15 @@ const JobMain = () => {
                 view === "grid" ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
               }`}
             >
-              {jobs.map((job) => (
-                <JobCard key={job.id} job={job}  />
+              {filteredJobs.map((job) => (
+                <JobCard key={job._id} job={job} />
               ))}
             </div>
           </Suspense>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default JobMain;
+export default JobMain
