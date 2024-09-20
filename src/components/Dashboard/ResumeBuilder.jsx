@@ -145,14 +145,15 @@ const ResumeBuilder = ({data}) => {
       setResume({
         personalInfo: {
           name: newdata.personalInfo.name,
-          email: '',
-          phone: '',
-          location: '',
+          email: newdata.personalInfo.email,
+          phone: newdata.personalInfo.phone,
+          location: newdata.personalInfo.location,
         },
-        summary: '',
-        experience: [{ company: '', position: '', duration: '', description: '' }],
-        education: [{ institution: '', degree: '', year: '' }],
-        skills: [''],
+        summary: newdata.summary,
+        experience: newdata.experience,
+        // experience: [{ company: '', position: '', duration: '', description: '' }],
+        education: newdata.education,
+        skills: newdata.skills,
       })
     
  

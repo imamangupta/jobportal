@@ -29,15 +29,21 @@ function Page() {
     const json = await response.json();
     if (json) {
       console.log(json);
-      let newData = {
+      if(json.error){
+        localStorage.removeItem('token');
+      router.push("/");
+      }else{
 
-        userName: json?.user?.userName,
-        userId: json.user.id,
-        role: json.user.roleName,
-        email: json.user.email
-
+        let newData = {
+          
+          userName: json?.user?.userName,
+          userId: json.user.id,
+          role: json.user.roleName,
+          email: json.user.email
+          
+        }
+        setData(newData)
       }
-      setData(newData)
 
       // dispatch(setUser(json.user));
     }
