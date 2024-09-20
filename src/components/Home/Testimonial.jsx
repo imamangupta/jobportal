@@ -72,7 +72,7 @@ const Testimonial = () => {
     ],
   };
   return (
-    <div className="py-14 mb-10">
+    <div className="py-14 mb-10" id="testimonial">
       <div className="container">
         {/* header section */}
         <div className="space-y-4 p-6 text-center max-w-[600px] mx-auto mb-6">
