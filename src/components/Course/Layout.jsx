@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen">
       <aside 
         className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-md transform transition-all duration-300 ease-in-out ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'

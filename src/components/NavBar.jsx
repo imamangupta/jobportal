@@ -137,9 +137,9 @@ export default function NavBar() {
       label: "Home",
       href: "/",
       subItems: [
-        { label: "About Us", href: "/about" },
-        { label: "Services", href: "/services" },
-        { label: "More", href: "/more" },
+        { label: "About Us", href: "#about-us" },
+        { label: "Services", href: "#why-choose-us" },
+        { label: "FAQ", href: "#FAQ" },
       ],
     },
     {
@@ -157,7 +157,7 @@ export default function NavBar() {
       href: "/job",
       subItems: [
         { label: "Jobs", href: "/job" },
-        { label: "Intership", href: "/job?jobtype=intership" },
+        { label: "Internship", href: "/job?jobtype=internship" },
         { label: "Contract", href: "/job?jobtype=contract" },
       ],
     },

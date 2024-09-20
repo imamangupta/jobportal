@@ -10,7 +10,6 @@ function page() {
     <NavBar/>
     <Layout>
       <div className="space-y-6">
-        <h1 className="text-3xl font-bold text-gray-900">Available Tests</h1>
         <TestPage/>
       </div>
     </Layout>
