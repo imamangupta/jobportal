@@ -1,3 +1,4 @@
+// components/TabContent.jsx
 "use client";
 
 import React, { useState } from "react";
@@ -53,12 +54,16 @@ export default function TabContent({ activeTab, lesson }) {
               Submit Question
             </motion.button>
             <div className="mt-4">
-              {lesson.qna.map((item, index) => (
-                <div key={index} className="mb-2">
-                  <p className="font-bold">{item.question}</p>
-                  <p className="text-sm text-gray-700">{item.answer}</p>
-                </div>
-              ))}
+              {lesson.qna.length > 0 ? (
+                lesson.qna.map((item, index) => (
+                  <div key={index} className="mb-2">
+                    <p className="font-bold">{item.question}</p>
+                    <p className="text-sm text-gray-700">{item.answer}</p>
+                  </div>
+                ))
+              ) : (
+                <p className="text-sm text-gray-700">No questions asked yet.</p>
+              )}
             </div>
           </motion.div>
         );
@@ -70,13 +75,17 @@ export default function TabContent({ activeTab, lesson }) {
             transition={{ duration: 0.5 }}
           >
             <h3 className="text-lg font-bold mb-2">Downloads</h3>
-            <a
-              href={lesson.downloadFile}
-              className="bg-purple-600 text-white px-4 py-2 rounded-md text-sm"
-              download
-            >
-              Download Lesson Files
-            </a>
+            {lesson.downloadFile ? (
+              <a
+                href={lesson.downloadFile}
+                className="bg-purple-600 text-white px-4 py-2 rounded-md text-sm"
+                download
+              >
+                Download Lesson Files
+              </a>
+            ) : (
+              <p className="text-sm text-gray-700">No files available for download.</p>
+            )}
           </motion.div>
         );
       case "announcements":

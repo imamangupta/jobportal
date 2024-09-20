@@ -1,11 +1,11 @@
-// components/Navigation.jsx
+// components/CourseNavTab.jsx
 "use client";
 
 import React from "react";
 import { motion } from "framer-motion";
 
 export default function CourseNavTab({
-  currentLesson,
+  currentLessonIndex,
   totalLessons,
   onPrevious,
   onNext,
@@ -16,10 +16,10 @@ export default function CourseNavTab({
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className={`bg-purple-600 text-white px-6 py-2 rounded-full ${
-          currentLesson === 0 ? "opacity-50 cursor-not-allowed" : ""
+          currentLessonIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
         }`}
         onClick={onPrevious}
-        disabled={currentLesson === 0}
+        disabled={currentLessonIndex === 0}
       >
         Previous
       </motion.button>
@@ -27,12 +27,12 @@ export default function CourseNavTab({
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className={`bg-purple-600 text-white px-6 py-2 rounded-full ${
-          currentLesson === totalLessons - 1
+          currentLessonIndex === totalLessons - 1
             ? "opacity-50 cursor-not-allowed"
             : ""
         }`}
         onClick={onNext}
-        disabled={currentLesson === totalLessons - 1}
+        disabled={currentLessonIndex === totalLessons - 1}
       >
         Next
       </motion.button>

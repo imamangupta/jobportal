@@ -1,118 +1,67 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import VideoPlayer from "./VideoPlayer";
-import CourseNavTab from "./CourseNavTab";
+import CourseNavTab from "./CourseNavTab"; // Ensure the correct import
 import TabContent from "./TabContent";
 import { motion } from "framer-motion";
-
-const lessons = [
-  {
-    id: 1,
-    title: "Introduction to JavaScript + Setup | JavaScript Tutorial in Hindi #1",
-    overview:
-      "In this lesson, you will learn the basics of JavaScript and how to set up your development environment.",
-    qna: [
-      {
-        question: "What is JavaScript?",
-        answer: "JavaScript is a versatile programming language used for web development.",
-      },
-      {
-        question: "How to set up a JavaScript environment?",
-        answer: "You can set up using any code editor like VS Code and running scripts in a browser.",
-      },
-    ],
-    downloadFile: "https://example.com/download/setup-files.zip",
-    videoUrl: "https://www.youtube.com/embed/gwqMq_4ZEP0?si=AWFF58wYWX6s_oi9",
-  },
-  {
-    id: 2,
-    title: "Variables in JavaScript | JavaScript Tutorial in Hindi #2",
-    overview:
-      "This lesson covers variables in JavaScript, including the types of variables and how to use them.",
-    qna: [
-      {
-        question: "What are variables?",
-        answer: "Variables are containers for storing data values and are fundamental in JavaScript.",
-      },
-      {
-        question: "What are the data types in JavaScript?",
-        answer: "Common data types include strings, numbers, booleans, undefined, null, and objects.",
-      },
-    ],
-    downloadFile: "https://example.com/download/variables-files.zip",
-    videoUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID_2",
-  },{
-    id: 3,
-    title: "const, let and var in JavaScript | JavaScript Tutorial in Hindi #3",
-    overview:
-      "Learn the differences between const, let, and var, and when to use each in JavaScript.",
-    qna: [
-      {
-        question: "What is the difference between const, let, and var?",
-        answer:
-          "const is for constants, let is for block-scoped variables, and var is function-scoped.",
-      },
-    ],
-    downloadFile: "https://example.com/download/const-let-var-files.zip",
-    videoUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID_3",
-  },
-  {
-    id: 4,
-    title: "Primitives and Objects in JavaScript | JavaScript Tutorial in Hindi #4",
-    overview:
-      "Understand the distinction between primitive data types and objects in JavaScript.",
-    qna: [
-      {
-        question: "What are primitive types?",
-        answer:
-          "Primitive types include string, number, boolean, null, undefined, symbol, and bigint.",
-      },
-    ],
-    downloadFile: "https://example.com/download/primitives-objects-files.zip",
-    videoUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID_4",
-  },
-  {
-    id: 5,
-    title: "JavaScript Chapter 1 - Practice Set | JavaScript Tutorial in Hindi #5",
-    overview:
-      "This practice set will help you reinforce your understanding of the topics covered in Chapter 1.",
-    qna: [
-      {
-        question: "What is included in the practice set?",
-        answer: "It includes exercises on variables, data types, and basic JavaScript syntax.",
-      },
-    ],
-    downloadFile: "https://example.com/download/practice-set.zip",
-    videoUrl: "https://www.youtube.com/embed/YOUR_VIDEO_ID_5",
-  },
-  // ... other lessons ...
-];
+import { useParams, useRouter } from 'next/navigation';
+import { courses } from "@/utils/courses";
 
 export default function CourseHome() {
-  const [currentLesson, setCurrentLesson] = useState(0);
+  const router = useRouter();
+  const params =useParams();
+  let {courseId}=params 
+  // const { courseId } = router.query || {};
+  const [course, setCourse] = useState(null);
+  const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [activeTab, setActiveTab] = useState("overview");
 
+  useEffect(() => {
+    if (courseId) {
+      const foundCourse = courses.find(c => c.id.toString() === courseId);
+      if (foundCourse) {
+        setCourse(foundCourse);
+      } else {
+        // Redirect to courses page if course not found
+        router.push('/courses');
+      }
+    }
+  }, [courseId, router]);
+
+  // Loading state for courseId
+  if (!courseId) {
+    return <div className="text-center">Loading course information...</div>;
+  }
+
+  // Loading state for course data
+  if (!course) {
+    return <div className="text-center">Loading course details...</div>;
+  }
+
   const handlePrevious = () => {
-    if (currentLesson > 0) setCurrentLesson(currentLesson - 1);
+    if (currentLessonIndex > 0) setCurrentLessonIndex(currentLessonIndex - 1);
   };
 
   const handleNext = () => {
-    if (currentLesson < lessons.length - 1) setCurrentLesson(currentLesson + 1);
+    if (currentLessonIndex < course.lessons.length - 1) setCurrentLessonIndex(currentLessonIndex + 1);
   };
+
+  const currentLesson = course.lessons[currentLessonIndex];
 
   return (
     <motion.div
-      className="flex flex-col md:flex-row min-h-screen bg-[#f8f3ff]"
+      className="flex flex-col md:flex-row min-h-screen "
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <Sidebar
-        lessons={lessons}
-        currentLesson={currentLesson}
-        setCurrentLesson={setCurrentLesson}
+        title={course.title}
+        lessons={course.lessons}
+        currentLessonIndex={currentLessonIndex}
+        setCurrentLessonIndex={setCurrentLessonIndex}
       />
 
       <motion.main
@@ -121,17 +70,15 @@ export default function CourseHome() {
         animate={{ x: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 50 }}
       >
-        {/* Video Player Section */}
         <motion.div
           className="w-full"
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 50 }}
         >
-          <VideoPlayer lesson={lessons[currentLesson].title} videoUrl={lessons[currentLesson].videoUrl} />
+          <VideoPlayer lesson={currentLesson.title} videoUrl={currentLesson.videoUrl} />
         </motion.div>
 
-        {/* Tab Content Section */}
         <motion.div
           className="w-full"
           initial={{ y: -10, opacity: 0 }}
@@ -157,20 +104,19 @@ export default function CourseHome() {
             </div>
             <TabContent
               activeTab={activeTab}
-              lesson={lessons[currentLesson]} // Pass the entire lesson object
+              lesson={currentLesson}
             />
           </div>
         </motion.div>
 
-        {/* Navigation Buttons */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 50 }}
         >
           <CourseNavTab
-            currentLesson={currentLesson}
-            totalLessons={lessons.length}
+            currentLesson={currentLessonIndex}
+            totalLessons={course.lessons.length}
             onPrevious={handlePrevious}
             onNext={handleNext}
           />
