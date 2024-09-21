@@ -6,7 +6,9 @@ import { OrbitControls, Sphere, Box, Text, Float } from '@react-three/drei'
 import { FaGoogle, FaApple } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 import { BaseApiUrl } from '@/utils/constanst'
-import { toast } from "sonner";
+import { toast } from "sonner"
+import { Button } from "@/components/ui/button"
+import { Loader2 } from "lucide-react"
 
 function BackgroundScene() {
   const sphereRef = useRef()
@@ -48,6 +50,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isFormValid, setIsFormValid] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const validateForm = () => {
@@ -55,33 +58,37 @@ export default function LoginForm() {
     const isPasswordValid = password.length >= 6 // Assuming a minimum password length of 6
     setIsFormValid(isEmailValid && isPasswordValid)
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsLoading(true)
 
+    console.log(email, password)
 
-    console.log(email, password);
+    try {
+      const response = await fetch(`${BaseApiUrl}/user/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: email, password: password })
+      })
+      const json = await response.json()
 
-    const response = await fetch(`${BaseApiUrl}/user/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email: email, password: password })
-    });
-    const json = await response.json();
-
-    if (json.data) {
-      console.log(json);
-
-      toast.success("Login SuccessFull");
-      localStorage.setItem('token', json.data.token)
-      router.push("/dashboard")
-    } else {
-      toast.error("Invalid Credentials");
+      if (json.data) {
+        console.log(json)
+        toast.success("Login Successful")
+        localStorage.setItem('token', json.data.token)
+        router.push("/dashboard")
+      } else {
+        toast.error("Invalid Credentials")
+      }
+    } catch (error) {
+      console.error("Login error:", error)
+      toast.error("An error occurred during login")
+    } finally {
+      setIsLoading(false)
     }
-
-
-
   }
 
   return (
@@ -95,12 +102,12 @@ export default function LoginForm() {
       <div className="relative z-10 w-full max-w-md bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow-lg p-8 my-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Login to Your Account</h2>
         <p className="text-center text-gray-600 mb-6">
-          Dont have an account?{" "}
+          Don't have an account?{" "}
           <a href="/signup" className="text-blue-500 hover:underline">
             SIGN UP
           </a>
         </p>
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
@@ -142,12 +149,20 @@ export default function LoginForm() {
               </a>
             </div>
           </div>
-          <button
-            className="w-full mt-6 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          <Button
+            className="w-full mt-6"
             type="submit"
+            disabled={isLoading}
           >
-            LOG IN
-          </button>
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Please wait
+              </>
+            ) : (
+              'LOG IN'
+            )}
+          </Button>
         </form>
       </div>
     </div>
