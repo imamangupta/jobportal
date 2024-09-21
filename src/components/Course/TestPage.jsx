@@ -337,7 +337,7 @@ export default function TestPage() {
           </Tabs>
         </div>
         <div>
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle>Your Profile</CardTitle>
             </CardHeader>
@@ -367,7 +367,7 @@ export default function TestPage() {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
           <Card className="mt-4">
             <CardHeader>
               <CardTitle>Quick Stats</CardTitle>
