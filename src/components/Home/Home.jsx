@@ -33,7 +33,7 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
             >
-             Don't just learn—turn your new skills into a rewarding career. Our platform bridges the gap between education and employment, making it easy to find both learning resources and job opportunities in one place. Success is just a click away! 
+             Dont just learn—turn your new skills into a rewarding career. Our platform bridges the gap between education and employment, making it easy to find both learning resources and job opportunities in one place. Success is just a click away! 
             </motion.p>
             {/* button section */}
             <motion.div
