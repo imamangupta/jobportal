@@ -10,10 +10,11 @@ import Message from "./Message";
 import NewsFeed from "./NewsFeed";
 import MyProfile from "./MyProfile";
 import Setting from "./Setting";
-import { useRouter } from "next/navigation";
+import { useSearchParams ,useRouter } from "next/navigation";
 import Link from "next/link";
 import JobPostingManager from "./JobPostingManager";
 import MyApplication from "./MyApplication";
+
 
 
 const routeItem = [
@@ -25,6 +26,12 @@ const routeItem = [
 export default function Layout({ data }) {
 
   // console.log(data);
+ 
+  const searchParams = useSearchParams();
+const nav = searchParams.get('nav');
+
+
+
   
 
   const sidebarItems = [
@@ -57,7 +64,7 @@ export default function Layout({ data }) {
 
 
 
-  const [activeItem, setActiveItem] = useState("Dashboard");
+  const [activeItem, setActiveItem] = useState(nav||"Dashboard");
   const [activeHomeItem, setActiveHomeItem] = useState("/");
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
