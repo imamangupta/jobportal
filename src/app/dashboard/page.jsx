@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 // import { useDispatch, useSelector } from 'react-redux';
 // import { setUser } from '../redux/userSlice'
 import { useRouter } from "next/navigation";
-
+import { Suspense } from 'react';
 function Page() {
   // const dispatch = useDispatch();
   const router = useRouter();
@@ -59,7 +59,10 @@ function Page() {
 
   return (
     <div>
+      <Suspense fallback={<div>Loading...</div>}>
+       
       <Layout data={data} />
+      </Suspense>
     </div>
   )
 }
