@@ -13,14 +13,7 @@ export default function Otp() {
     const [otp, setOtp] = useState('')
     const router = useRouter()
 
-    const [data, setData] = useState(null);
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Now it's safe to access localStorage
-      const storedData = localStorage.getItem('email');
-      setData(storedData);
-    }
-  }, []);
+  
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -36,7 +29,7 @@ export default function Otp() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email: data, userotp: otp })
+            body: JSON.stringify({ email: localStorage.getItem('email'), userotp: otp })
         });
         const json = await response.json();
 
@@ -75,7 +68,7 @@ export default function Otp() {
             >
                 <h2 className="text-2xl font-bold text-center text-gray-800 mb-3">OTP Verify</h2>
                 <p className="text-center text-gray-600 mb-3 text-sm">
-                    Send SuccessFully Otp to {data}
+                    Send SuccessFully Otp to Email
 
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-3">
