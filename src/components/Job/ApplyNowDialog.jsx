@@ -137,9 +137,10 @@ export default function ApplyNowDialog({ isOpen, onClose, jobTitle, company,job 
               <Input
                 id="resume"
                 type="text"
-                onChange={(e) => setResume(e.target.value)}
-                accept=".pdf,.doc,.docx"
+                // onChange={(e) => setResume(e.target.value)}
+                // accept=".pdf,.doc,.docx"
                 required
+                value={'Created Resume Link'}
               />
             </div>
             <DialogFooter>
