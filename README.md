@@ -18,7 +18,7 @@ Check out the live deployment of the job portal: [CodePathshala Job Portal](http
 
 ## Features Overview
 
-1. **AI Custom Chatbot**: An intelligent chatbot designed to provide personalized assistance and support for students, enhancing their learning experience.
+1. **AI Custom Chatbot**: An intelligent chatbot designed to provide personalized assistance and support for students, enhancing their learning experience..
 
 2. **Personalized Doubt Solver**: A unique feature that allows students to get their questions answered instantly, tailored to their learning needs.
 
