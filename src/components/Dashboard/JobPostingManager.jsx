@@ -56,7 +56,9 @@ const JobPostingManager = ({data}) => {
   }
 
   const viewApplicants = (jobId, jobTitle) => {
-    router.push(`/applicants/${jobId}?title=${encodeURIComponent(jobTitle)}`)
+    // router.push(`/applicants/${jobId}?title=${jobTitle}`)
+    const url = `/applicants/${jobId}?title=${jobTitle}`;
+    window.open(url, '_blank');
   }
 
   return (

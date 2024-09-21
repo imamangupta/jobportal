@@ -13,10 +13,10 @@ const Interview = () => {
   const [interviews, setInterviews] = useState([
     {
       id: 1,
-      company: "TechCorp India",
+      company: "Code Pathshala",
       position: "Senior Developer",
-      date: "2023-06-01",
-      notes: "Prepare for system design and coding questions.",
+      date: "2024-09-21",
+      notes: "Start Interview ask According Your Questions",
     },
   ]);
 
@@ -51,7 +51,9 @@ const Interview = () => {
 
   // Redirect to the InterviewRoom page with a unique roomID
   const startInterview = (roomID) => {
-    router.push(`/interview/${roomID}`); // Route correctly to the new structure
+    // router.push(`/interview/${roomID}`); // Route correctly to the new structure
+    const url = `/interview/${roomID}`;
+  window.open(url, '_blank');
   };
 
   const [commonQuestions] = useState([
@@ -109,7 +111,7 @@ const Interview = () => {
             </CardHeader>
             <CardContent>
               <p>
-                <strong>Position:</strong> {interview.position}
+                {/* <strong>Position:</strong> {interview.position} */}
               </p>
               <p>
                 <strong>Date:</strong> {interview.date}
@@ -117,19 +119,15 @@ const Interview = () => {
               <p>
                 <strong>Notes:</strong> {interview.notes}
               </p>
-              <Button
-                variant="destructive"
-                onClick={() => removeInterview(interview.id)}
-                className="mt-4"
-              >
+              <div>
+{/* 
+              <Button  variant="destructive"   onClick={() => removeInterview(interview.id)} className="mt-4"   >
                 <MinusIcon className="mr-2 h-4 w-4" /> Remove
-              </Button>
-              <Button
-                onClick={() => startInterview(interview.id)}
-                className="mt-4"
-              >
+              </Button> */}
+              <Button  onClick={() => startInterview(interview.id)}    className="mt-3 ml-4"          >
                 Start Interview
               </Button>
+              </div>
             </CardContent>
           </Card>
         ))}
