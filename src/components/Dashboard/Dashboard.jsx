@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { motion } from 'framer-motion';
+import { Button } from "@/components/ui/button"
+import { useRouter } from 'next/navigation';
 
 const profileData = [
   { name: 'Application Answered', value: 90 },
@@ -37,6 +39,7 @@ const popularJobs = [
 export default function Dashboard() {
   const [stats, setStats] = useState([]);
   const [jobInsights, setJobInsights] = useState([]);
+  const route = useRouter();
 
   useEffect(() => {
     // Simulated API call to fetch stats
@@ -66,18 +69,47 @@ export default function Dashboard() {
     fetchJobInsights();
   }, []);
 
+  const gotointerview = () => {
+    // route.push('/dashboard?nav=Interview')
+    const url = `/dashboard?nav=Interview`;
+    window.open(url, '_blank');
+  }
+
+  const gotomessage = () => {
+    // route.push('/dashboard?nav=Interview')
+    const url = `/dashboard?nav=Message`;
+    window.open(url, '_blank');
+  }
+  const gotojob = () => {
+    // route.push('/dashboard?nav=Interview')
+    const url = `/dashboard?nav=Post New Job`;
+    window.open(url, '_blank');
+  }
+
+  const gotoprofile = () => {
+    // route.push('/dashboard?nav=Interview')
+    const url = `/dashboard?nav=My Profile`;
+    window.open(url, '_blank');
+  }
+
+  const gotosetting = () => {
+    // route.push('/dashboard?nav=Interview')
+    const url = `/dashboard?nav=Setting`;
+    window.open(url, '_blank');
+  }
+
   return (
     <div className="space-y-6 m-2">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold text-indigo-900 mb-6 "
+        className="text-3xl font-bold text-indigo-900 mb-6 text-center"
       >
         Welcome to Your CodePathshala Dashboard
       </motion.h1>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+     
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, index) => (
           <motion.div
             key={stat.title}
@@ -95,7 +127,126 @@ export default function Dashboard() {
         ))}
       </div>
 
-      Profile Strength and Job Details
+      Profile Strength and Job Details */}
+
+
+
+
+      <div className='m-4'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-lg shadow p-6 flex items-center space-x-4"
+        >
+          <div className="text-4xl">💼</div>
+          <div className='flex justify-between w-full'>
+
+            <div>
+              <p className="text-3xl font-bold">Interview</p>
+              <p className="text-gray-500">View Interview Start Your first.</p>
+            </div>
+
+            <div>
+              <Button variant="link" onClick={gotointerview}>View</Button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      <div className='m-4'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-lg shadow p-6 flex items-center space-x-4"
+        >
+          <div className="text-4xl">📢</div>
+          <div className='flex justify-between w-full'>
+
+            <div>
+              <p className="text-3xl font-bold">Message/Chats</p>
+              <p className="text-gray-500">Chat with your company/candident</p>
+            </div>
+
+            <div>
+              <Button variant="link" onClick={gotomessage}>View</Button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+
+      {/* <div className='m-4'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-lg shadow p-6 flex items-center space-x-4"
+        >
+          <div className="text-4xl">👥</div>
+          <div className='flex justify-between w-full'>
+
+            <div>
+              <p className="text-3xl font-bold">Add Jobs</p>
+              <p className="text-gray-500">Add Jobs and Maitainer get Application</p>
+            </div>
+
+            <div>
+              <Button variant="link" onClick={gotojob}>View</Button>
+            </div>
+          </div>
+        </motion.div>
+      </div> */}
+
+      <div className='m-4'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-lg shadow p-6 flex items-center space-x-4"
+        >
+          <div className="text-4xl">🎉</div>
+          <div className='flex justify-between w-full'>
+
+            <div>
+              <p className="text-3xl font-bold">Profile</p>
+              <p className="text-gray-500">User Profile</p>
+            </div>
+
+            <div>
+              <Button variant="link" onClick={gotoprofile}>View</Button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      <div className='m-4'>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-lg shadow p-6 flex items-center space-x-4"
+        >
+          <div className="text-4xl">👥</div>
+          <div className='flex justify-between w-full'>
+
+            <div>
+              <p className="text-3xl font-bold">setting</p>
+              <p className="text-gray-500">user setting</p>
+            </div>
+
+            <div>
+              <Button variant="link" onClick={gotosetting}>View</Button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+
+
+
+
+
+
+
+
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Profile Strength */}
         {/* <motion.div
