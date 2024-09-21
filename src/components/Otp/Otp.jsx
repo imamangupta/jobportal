@@ -68,7 +68,7 @@ export default function Otp() {
             >
                 <h2 className="text-2xl font-bold text-center text-gray-800 mb-3">OTP Verify</h2>
                 <p className="text-center text-gray-600 mb-3 text-sm">
-                    Send SuccessFully Otp to Email
+                    Send SuccessFully Otp to {localStorage.getItem('email')}
 
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-3">
