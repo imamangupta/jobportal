@@ -96,31 +96,22 @@ export default function SignupForm() {
     e.preventDefault()
     if (isFormValid) {
       console.log(formData);
-
+      // const { username, email, password, role, firstname, lastname } = req.body
       let { email, password, userName, userType, firstname, lastname } = formData
-      const response = await fetch(`${BaseApiUrl}/user`, {
+      const response = await fetch(`http://localhost:4000/api/user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: email, password: password, role: userType, userName: userName })
+        body: JSON.stringify({ email: email, password: password, role: userType, username: userName,firstname:firstname,lastname:lastname })
       });
       const json = await response.json();
 
-      if (!json.error) {
+      if (json) {
         
-        const response2 = await fetch(`https://jobportal-backend-wine.vercel.app/signup`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ username: userName, secret: 'secret', email: email, first_name: firstname, last_name: lastname, })
-        });
-        const json2 = await response2.json();
-
-        localStorage.setItem('token', json.data.token)
-        toast.success("Signup SuccessFull", json2);
-        router.push("/dashboard")
+        localStorage.setItem('email', email)
+        toast.success("Otp send successfully");
+        router.push("/otp")
       } else {
         toast.error("Error to Create");
       }
