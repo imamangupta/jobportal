@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { toast } from "sonner"
 import { useRouter } from 'next/navigation'
+import { BaseApiUrl } from '@/utils/constanst'
 export default function Otp() {
     const [otp, setOtp] = useState('')
     const router = useRouter()
@@ -21,7 +22,7 @@ export default function Otp() {
 
 
 
-        const response = await fetch(`http://localhost:4000/api/user/checkout`, {
+        const response = await fetch(`${BaseApiUrl}/user/checkout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

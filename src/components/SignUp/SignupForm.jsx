@@ -98,7 +98,7 @@ export default function SignupForm() {
       console.log(formData);
       // const { username, email, password, role, firstname, lastname } = req.body
       let { email, password, userName, userType, firstname, lastname } = formData
-      const response = await fetch(`http://localhost:4000/api/user`, {
+      const response = await fetch(`${BaseApiUrl}/user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
