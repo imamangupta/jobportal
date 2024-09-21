@@ -2,8 +2,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { SlideUp } from "../../utils/animation";
+import { useRouter } from "next/navigation";
 
 const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
+  const router = useRouter();
+  const handleNavigateRoadmap = () => router.push("/courses/roadmap");
   return (
     <div className="bg-white pb-14" id="about-us">
       <div className="container">
@@ -55,7 +58,7 @@ const Banner = ({ image, title, subtitle, link, tag, reverse }) => {
               whileInView={"visible"}
               className="flex justify-center md:justify-start"
             >
-              <button className="primary-btn !mt-5">Get Started</button>
+              <button className="primary-btn !mt-5" onClick={handleNavigateRoadmap}>Get Started</button>
             </motion.div>
           </div>
         </div>
