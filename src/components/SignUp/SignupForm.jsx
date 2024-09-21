@@ -107,8 +107,8 @@ export default function SignupForm() {
       });
       const json = await response.json();
 
-      if (json) {
-        // console.log(json.data.token);
+      if (!json.error) {
+        
         const response2 = await fetch(`https://jobportal-backend-wine.vercel.app/signup`, {
           method: 'POST',
           headers: {
@@ -122,10 +122,8 @@ export default function SignupForm() {
         toast.success("Signup SuccessFull", json2);
         router.push("/dashboard")
       } else {
-        toast.error("some error");
-
+        toast.error("Error to Create");
       }
-
     }
   }
 
